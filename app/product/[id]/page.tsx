@@ -6,12 +6,18 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default async function Dashboard({ params }: { params: { id: string } }) {
-  const { id } = await params
+// interface IParams {
+//   params: {
+//     id: string;
+//   };
+// }
+
+export default async function Dashboard() {
+//   const { id } = (await params).params;
 
   return (
-    <div>
-      <h1>Product {id}</h1>
+    <div className="container">
+      <h1>Product </h1>
       <Link href="..">Home</Link>
     </div>
   );

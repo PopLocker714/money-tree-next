@@ -4,7 +4,6 @@ import { Autoplay, Navigation, Pagination, Virtual } from "swiper/modules";
 import HeroSlideItem from "./HeroSlideItem";
 import RightArrow from "../../components/slider/RightArrow";
 import LeftArrow from "../../components/slider/LeftArrow";
-import { useId } from "react";
 
 const heroSlides = [
   {

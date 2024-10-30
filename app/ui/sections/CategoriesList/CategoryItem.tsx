@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const CategoryItem = ({ title, image }) => {
+const CategoryItem = ({ title, image }: { title: string; image: string }) => {
   return (
     <Link href="/catalog" style={styleItem(image)} className="swiper-slide">
       {title}
@@ -8,7 +8,7 @@ const CategoryItem = ({ title, image }) => {
   );
 };
 
-const styleItem = (url) => {
+const styleItem = (url: string) => {
   return {
     display: "flex",
     alignItems: "flex-start",
