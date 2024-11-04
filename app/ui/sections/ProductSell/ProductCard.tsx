@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-interface IProductCard {
+export interface IProductCard {
   title: string;
   image: string;
   id: string;
@@ -19,8 +19,8 @@ function ProductCard({ cost, discount, id, image, title }: IProductCard) {
     >
       {discount ? (
         <>
-          <span className="absolute top-4 right-4 bg-red-500 text-white text-sm font-medium p-[6px] rounded-full">Распродажа</span>
-          <span className="absolute top-4 left-4  bg-red-500 text-white text-sm font-medium p-[6px] rounded-full">
+          <span className="absolute top-4 right-4 bg-red-500 text-white-100  text-sm font-medium p-[6px] rounded-full">Распродажа</span>
+          <span className="absolute top-4 left-4  bg-red-500 text-white-100 text-sm font-medium p-[6px] rounded-full">
             {Math.floor(100 - ((cost - discount) / cost) * 100)}%
           </span>
         </>

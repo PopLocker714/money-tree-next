@@ -1,25 +1,33 @@
+import "server-only";
+
 import { JWTPayload, jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import getExpAuthTime from "../utils/getExpAuthTime";
 
 const key = new TextEncoder().encode(process.env.JWT_SECRET);
 
-export async function encrypt(payload: JWTPayload) {
+export async function encrypt(payload: JWTPayload, exp: Date) {
   return await new SignJWT(payload)
     .setProtectedHeader({
       alg: "HS256",
     })
     .setIssuedAt()
-    .setExpirationTime("10 sec from now")
+    .setExpirationTime(exp)
     .sign(key);
 }
 
 export async function decrypt(input: string) {
-  const { payload } = await jwtVerify<{ email: string; expires: Date }>(input, key, {
-    algorithms: ["HS256"],
-  });
+  try {
+    const { payload } = await jwtVerify<{ email: string; expires: Date }>(input, key, {
+      algorithms: ["HS256"],
+    });
 
-  return payload;
+    return payload;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 }
 
 export async function getSession() {
@@ -39,14 +47,20 @@ export async function updateSession(request: NextRequest) {
   }
 
   const parsed = await decrypt(session);
-  const expires = new Date(Date.now() + 10 * 1000);
+
+  if (!parsed) {
+    request.cookies.clear();
+    return;
+  }
+
+  const expires = getExpAuthTime();
+
   parsed.expires = expires;
   const res = NextResponse.next();
-  // const res = NextResponse.redirect(new URL(redirectUrl, request.url));
 
   res.cookies.set({
     name: "session",
-    value: await encrypt(parsed),
+    value: await encrypt(parsed, expires),
     httpOnly: true,
     expires,
   });

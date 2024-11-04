@@ -7,10 +7,10 @@ console.log(process.env.ADMIN_EMAIL);
 
 export default function Home() {
   return (
-    <>
+    <main>
       <Hero />
       <CategoriesList />
       <ProductSell />
-    </>
+    </main>
   );
 }

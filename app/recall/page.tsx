@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { sendRecall } from "../actions";
+import Input from "../ui/components/input/Input";
 
 export const metadata: Metadata = {
   title: "Обратный звонок",
@@ -33,10 +34,11 @@ export default function Recall() {
           placeholder="Ваш телефон"
         />
         <div>
-          <input type="checkbox" id="privacy" name="privacy" value="privacy" />
+          {/* <input type="checkbox" id="privacy" name="privacy" value="privacy" />
           <label className="ml-1 text-sm" htmlFor="privacy">
             Нажимая &quot;Отправить&quot;, вы соглашаетесь с политикой конфиденциальности
-          </label>
+          </label> */}
+          <Input label='Нажимая "Отправить", вы соглашаетесь с политикой конфиденциальности' type="checkbox" name="privacy" id="privacy" />
         </div>
         <button className="bg-orange-400 rounded-2xl py-4 px-6 text-base border-none mt-8 text-white hover:bg-orange-500" type="submit">
           Отправить

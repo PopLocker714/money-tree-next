@@ -12,6 +12,9 @@ declare global {
       ADMIN_PASSWORD: TStringEnv;
       BOT_TOKEN: TStringEnv;
       BOT_CHAT_ID: TStringEnv;
+
+      AUTH_EXP_TIME: TStringEnv;
+
     }
   }
 }

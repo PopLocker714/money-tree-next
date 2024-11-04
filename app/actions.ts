@@ -1,38 +1,48 @@
 "use server";
 import { cookies } from "next/headers";
 import db from "./lib/db/db";
-import { users } from "./lib/db/schema";
+import { $Users } from "./lib/db/schema";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { verifyPassword } from "./utils/password";
 import { encrypt } from "./lib/auth";
+import getExpAuthTime from "./utils/getExpAuthTime";
 
-export async function login(fromData: FormData) {
+export async function login(previousState: { error: string }, fromData: FormData) {
   const email = fromData.get("email");
   const password = fromData.get("password");
 
   if (!email || !password) {
-    return;
+    return {
+      error: "Please fill all fields",
+    };
   }
 
   if (typeof email !== "string" || typeof password !== "string") {
-    return;
+    return {
+      error: "Please fill all fields",
+    };
   }
 
-  const userData = await db.query.users.findFirst({
-    where: eq(users.email, email),
+  const userData = await db.query.$Users.findFirst({
+    where: eq($Users.email, email),
   });
 
   if (!userData) {
-    return;
+    return {
+      error: "Incorrect password or email",
+    };
   }
 
   if (!verifyPassword(password, userData.password_hash, userData.salt)) {
-    return;
+    return {
+      error: "Incorrect password or email",
+    };
   }
 
-  const expires = new Date(Date.now() + 10 * 1000);
-  const session = await encrypt({ email: userData.email, expires });
+  const expires = getExpAuthTime();
+
+  const session = await encrypt({ email: userData.email, expires }, expires);
 
   (await cookies()).set("session", session, {
     httpOnly: true,

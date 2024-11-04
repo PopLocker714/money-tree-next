@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard";
 
-const products = [
+export const products = [
   {
     title: "Цветкок бромелиевыхв горшке",
     image: "/products/product-1.jpg",

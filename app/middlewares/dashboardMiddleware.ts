@@ -10,6 +10,10 @@ export default async function dashboardMiddleware(request: NextRequest) {
 
   try {
     const payload = await decrypt(session);
+    if (payload === null) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
     if (payload.email === process.env.ADMIN_EMAIL) {
       return await updateSession(request);
     }

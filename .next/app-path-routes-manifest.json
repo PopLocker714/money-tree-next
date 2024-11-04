@@ -1,1 +1,1 @@
-{"/_not-found/page":"/_not-found","/favicon.ico/route":"/favicon.ico","/page":"/","/login/page":"/login","/cart/page":"/cart","/catalog/page":"/catalog","/dashboard/page":"/dashboard","/product/[id]/page":"/product/[id]","/recall/page":"/recall"}
+{"/_not-found/page":"/_not-found","/favicon.ico/route":"/favicon.ico","/page":"/","/login/page":"/login","/cart/page":"/cart","/dashboard/page":"/dashboard","/catalog/page":"/catalog","/product/[id]/page":"/product/[id]","/dashboard/products/[id]/page":"/dashboard/products/[id]","/recall/page":"/recall"}

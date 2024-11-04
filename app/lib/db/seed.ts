@@ -1,6 +1,6 @@
 import { hashPassword } from "../../utils/password";
 import db from "./db";
-import { users } from "./schema";
+import { $Users } from "./schema";
 
 export const seed = async () => {
   const email = process.env.ADMIN_EMAIL;
@@ -16,7 +16,7 @@ export const seed = async () => {
 
   const { hash, salt } = hashPassword(process.env.ADMIN_PASSWORD!);
 
-  db.insert(users)
+  db.insert($Users)
     .values({ email, password_hash: hash, salt })
     .then((res) => console.log("SEED INSERTED", res))
     .catch((e) => console.log(e));
