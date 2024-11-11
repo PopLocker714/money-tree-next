@@ -2,7 +2,10 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
     darkMode: ["class"],
-    content: ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
+    // content: ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
+    content: [
+      "./src/**/*.{js,ts,jsx,tsx}", // Убедитесь, что пути включают src/app
+    ],
   theme: {
   	screens: {
   		sm: '640px',

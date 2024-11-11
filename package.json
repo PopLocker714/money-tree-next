@@ -8,12 +8,14 @@
     "start": "next start -p 4000",
     "start:prod": "next start -H xn----dtbebdaacaf9ecng1a.xn--80adxhks -p 42109",
     "lint": "next lint",
+    "studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@tanstack/react-table": "^8.20.5",
     "better-sqlite3": "^11.5.0",
+    "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.35.3",
