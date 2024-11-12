@@ -48,8 +48,6 @@ export default async function updateProductActon(_: IReturnProductAction, fromDa
   let imagesPromise: TImageItemPromise[] = [];
   let product: TProductSelect | undefined;
 
-  console.log("GALLERY_IMAGES", galleryImages);
-
   try {
     product = await db.query.$Products.findFirst({
       where: eq($Products.id, validatedFields.data.id),
@@ -71,7 +69,6 @@ export default async function updateProductActon(_: IReturnProductAction, fromDa
       }
 
       const res = await saveFile(file, `${index}`);
-      console.log("SAVE_FILE RES", res);
 
       if (savedImages[index]) {
         await deleteFile(savedImages[index]);
@@ -147,8 +144,10 @@ export default async function updateProductActon(_: IReturnProductAction, fromDa
       images,
     };
 
-    const result = await db.update($Products).set(updatedProduct).where(eq($Products.id, validatedFields.data.id));
-    console.log(result);
+    const result = await db.update($Products)
+      .set(updatedProduct)
+      .where(eq($Products.id, validatedFields.data.id))
+      .returning();
 
     return {
       error: null,
