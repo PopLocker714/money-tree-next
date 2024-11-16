@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import ProductListCart from "./components/ProductListCart";
+import OrderForm from "./components/OrderForm";
 
 export const metadata: Metadata = {
   title: "Корзина",
@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function Cart() {
   return (
     <section className="container py-10">
-      <h1>Корзина</h1>
+      <h1 className="text-3xl font-medium mb-7">Оформление заказа</h1>
       <ProductListCart />
-      <Link href="..">Домой</Link>
+      <OrderForm />
     </section>
   );
 }

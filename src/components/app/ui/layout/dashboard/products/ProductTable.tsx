@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useRouter } from "next/navigation";
 import { TProductColumn } from "./ProductColumn";
 
-interface DataTableProps< TValue> {
+interface DataTableProps<TValue> {
   columns: ColumnDef<TProductColumn, TValue>[];
   data: TProductColumn[];
 }

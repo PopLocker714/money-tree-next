@@ -1,20 +1,20 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-interface CartItem {
+export interface ICartItem {
   id: string;
   quantity: number;
 }
 
 interface CartContextType {
-  cart: Record<string, CartItem>;
-  setCart: (cart: Record<string, CartItem>) => void;
+  cart: Record<string, ICartItem>;
+  setCart: (cart: Record<string, ICartItem>) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCartState] = useState<Record<string, CartItem>>({});
+  const [cart, setCartState] = useState<Record<string, ICartItem>>({});
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [cart, isMounted]);
 
-  const setCart = (newCart: Record<string, CartItem>) => {
+  const setCart = (newCart: Record<string, ICartItem>) => {
     setCartState(newCart);
   };
 

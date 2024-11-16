@@ -4,6 +4,12 @@ import type { NextConfig } from "next";
 // seed()
 
 const nextConfig: NextConfig = {
+  reactStrictMode: false,
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "3mb",
+    },
+  },
   images: {
     remotePatterns: [
       {

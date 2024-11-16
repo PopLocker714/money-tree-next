@@ -32,7 +32,7 @@ function ProductCard({ cost = 0, discount, id, image, title, className }: IProdu
           </span>
         </>
       ) : null}
-      <Image alt={title} width={266} height={235} src={image || "https://placehold.co/266x235/000000/FFFFFF/png"} />
+      <Image className="min-w-[266px] min-h-[235px]" alt={title} width={266} height={235} src={image || "https://placehold.co/266x235/000000/FFFFFF/png"} />
       <div className="p-4">
         <h3 className="text-base text-foreground mb-4">{title}</h3>
         {!discount ? (

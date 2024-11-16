@@ -7,14 +7,14 @@ export default function Nav() {
 
 
   return (
-    <nav className="container mx-auto">
+    <header className="container mx-auto">
       <div className="flex justify-between flex-wrap pt-4 pb-2">
-        <div className="flex flex-1 max-w-[280px] justify-between">
+        <nav className="flex flex-1 max-w-[280px] justify-between">
           <NavLink text="Статьи" href="/" />
-          <NavLink text="Доставка" href="/" />
-          <NavLink text="Оплата" href="/" />
-        </div>
-        <div className="flex justify-between items-center min-w-[380px]">
+          <NavLink text="Доставка" href="/order" />
+          <NavLink text="Оплата" href="/payment" />
+        </nav>
+        <nav className="flex justify-between items-center min-w-[380px]">
           <NavLink text="Обратный звонок" href="/recall" />
 
           <span className="bg-gray-300 w-[1px] h-[20px]"></span>
@@ -39,13 +39,13 @@ export default function Nav() {
               </g>
             </svg>
           </a>
-        </div>
+        </nav>
       </div>
 
       <span className="flex bg-gray-100 w-full h-[1px] mb-2"></span>
 
       <div className="flex justify-between items-center ">
-        <div className="flex items-center justify-between max-w-[320px] w-full">
+        <nav className="flex items-center justify-between max-w-[320px] w-full">
           <Link href={"/"}>
             <Logo width={172} alt="Денежное дерево" height={56} src={"/Logo.png"} />
           </Link>
@@ -75,8 +75,8 @@ export default function Nav() {
             </svg>
             <span>Каталог</span>
           </Link>
-        </div>
-        <div className="flex">
+        </nav>
+        <nav className="flex">
           <Link aria-label="Корзина" href="/cart">
             <svg className="text-gray-400" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none">
               <path
@@ -102,8 +102,8 @@ export default function Nav() {
               ></path>
             </svg>
           </Link> */}
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }
