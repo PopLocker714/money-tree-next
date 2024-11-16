@@ -5,7 +5,11 @@ export const smtp = nodemailer.createTransport({
   port: Number(process.env.SMTP_PORT),
   secure: process.env.SMTP_SECURE === "true",
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    credentials: {
+      user: process.env.SMTP_USER || "",
+      pass: process.env.SMTP_PASS || "",
+    },
+     user: process.env.SMTP_USER,
+     pass: process.env.SMTP_PASS,
   },
 });
