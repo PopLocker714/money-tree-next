@@ -20,6 +20,9 @@ declare global {
       SMTP_PORT: TStringEnv;
       SMTP_USER: TStringEnv;
       SMTP_PASSWORD: TStringEnv;
+      SMTP_SECURE: TBoolEnv;
+      SMTP_FROM: TStringEnv;
+
     }
   }
 }

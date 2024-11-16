@@ -4,11 +4,11 @@ const sendMail = async ({ subject, to, text }: { to: string; subject: string; te
   try {
     // Определение данных письма
     await smtp.sendMail({
-      from: "<site@денежное-дерево.москва>",
+      from: process.env.SMTP_FROM,
       to,
       subject: subject || "Новое сообщение",
       text: text || "Нет текста",
-      html: `<p>${text || "Нет текста"}</p>`,
+      html: `${text || "Нет текста"}`,
     });
 
     console.log("Письмо успешно отправлено");
