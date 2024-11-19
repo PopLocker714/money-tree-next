@@ -6,6 +6,23 @@ import { eq } from "drizzle-orm";
 import { Metadata } from "next";
 import GalleryProduct from "./components/GalleryProduct";
 import AddCart from "./components/AddCart";
+import { getTreeCategoriesId } from "@/src/components/app/ui/layout/main/Catalog/AsideCategoryItem";
+import { getCategoryTree, TCategoryNode } from "../../actions/getCategoryTree";
+
+function findCategoryWithParents(categories: TCategoryNode[], categoryId: number, parents: TCategoryNode[] = []): TCategoryNode[] {
+  for (const category of categories) {
+    if (category.id === categoryId) {
+      return [...parents, category];
+    }
+    if (category.children && category.children.length > 0) {
+      const result = findCategoryWithParents(category.children, categoryId, [...parents, category]);
+      if (result.length > 0) {
+        return result;
+      }
+    }
+  }
+  return [];
+}
 
 export async function generateMetadata({ params }: TPropsPage): Promise<Metadata> {
   const id = (await params).id;
@@ -28,14 +45,21 @@ export async function generateMetadata({ params }: TPropsPage): Promise<Metadata
 export default async function Product({ params }: TPropsPage) {
   const id = (await params).id;
 
-  const product = await db.query.$Products.findFirst({ where: eq($Products.id, +id) });
-  // const product = (await db.select().from($Products).where(eq($Products.id, id)));
+  const [product, categories] = await Promise.all([
+    db.query.$Products.findFirst({
+      where: eq($Products.id, +id),
+      with: { category: true },
+    }),
+    getCategoryTree(),
+  ]);
 
   if (!product) {
     return <div className="container">Product not found</div>;
   }
 
-  const { discount, title, price: cost, description, sku, stock } = product;
+  const { discount, title, price: cost, description, sku, stock, categoryId } = product;
+
+  const categoryTree = categoryId !== null && findCategoryWithParents(categories, categoryId);
 
   const formatted = new Intl.NumberFormat("ru-RU", {
     style: "currency",
@@ -53,7 +77,20 @@ export default async function Product({ params }: TPropsPage) {
     <div className="container">
       <div className="flex my-4">
         <NavLink text="Главная" href=".." /> <span className="px-2">/</span> <NavLink text="Каталог" href="/catalog" />
-        <span className="px-2">/</span> {title}
+        <span className="px-2">/</span>{" "}
+        {categoryTree &&
+          categoryTree.map((category) => (
+            <>
+              <NavLink
+                text={category.name}
+                href={`/catalog?${new URLSearchParams({
+                  category: JSON.stringify(getTreeCategoriesId(category)),
+                })}`}
+              />
+              <span className="px-2">/</span>
+            </>
+          ))}{" "}
+        {title}
       </div>
 
       <div className="flex justify-between mb-4">

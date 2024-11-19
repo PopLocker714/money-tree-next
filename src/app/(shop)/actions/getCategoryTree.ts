@@ -23,7 +23,7 @@ function buildCategoryTree(categories: TCategorySelect[]) {
   return tree;
 }
 
-export const getCategory = async () => {
+export const getCategoryTree = async () => {
   const categories = await db.query.$Categories.findMany();
   return buildCategoryTree(categories);
 };

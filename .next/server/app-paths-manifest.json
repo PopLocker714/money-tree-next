@@ -10,7 +10,7 @@
   "/(shop)/product/[id]/page": "app/(shop)/product/[id]/page.js",
   "/(shop)/cart/page": "app/(shop)/cart/page.js",
   "/(shop)/order/page": "app/(shop)/order/page.js",
-  "/(shop)/catalog/page": "app/(shop)/catalog/page.js",
   "/(shop)/payment/page": "app/(shop)/payment/page.js",
+  "/(shop)/catalog/page": "app/(shop)/catalog/page.js",
   "/(shop)/recall/page": "app/(shop)/recall/page.js"
 }

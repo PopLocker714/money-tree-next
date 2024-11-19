@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { AnySQLiteColumn, int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
@@ -19,6 +20,13 @@ export const selectCategorySchema = createSelectSchema($Categories);
 export type TCategoryInsert = typeof $Categories.$inferInsert;
 export type TCategorySelect = typeof $Categories.$inferSelect;
 
+export const CategoryRelations = relations($Categories, ({ one }) => ({
+  children: one($Categories, {
+    fields: [$Categories.parentId],
+    references: [$Categories.id],
+  }),
+}));
+
 export const $Products = sqliteTable("products", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   sku: text("sku").notNull().unique(),
@@ -28,7 +36,9 @@ export const $Products = sqliteTable("products", {
   discount: integer("discount").default(0),
   stock: integer("stock").notNull().default(0),
   previewImage: text("previewImage"),
-  images: text("images").notNull().$default(() => JSON.stringify([null, null, null, null, null])),
+  images: text("images")
+    .notNull()
+    .$default(() => JSON.stringify([null, null, null, null, null])),
   categoryId: integer("category_id").references(() => $Categories.id, { onDelete: "set null" }),
   keywordsSearch: text("keywordsSearch"),
   isFeatured: integer("isFeatured", { mode: "boolean" }).default(false),
@@ -41,3 +51,10 @@ export const insertProductSchema = createInsertSchema($Products);
 export const selectProductSchema = createSelectSchema($Products);
 export type TProductInsert = typeof $Products.$inferInsert;
 export type TProductSelect = typeof $Products.$inferSelect;
+
+export const ProductRelations = relations($Products, ({ one }) => ({
+  category: one($Categories, {
+    fields: [$Products.categoryId],
+    references: [$Categories.id],
+  }),
+}));

@@ -1,17 +1,39 @@
 import { Metadata } from "next";
-import { connection } from "next/server";
 import db from "../../../lib/db/db";
 import ProductCard, { IProductCard } from "@/src/components/app/ui/sections/ProductSell/ProductCard";
 import Aside from "@/src/components/app/ui/layout/main/Catalog/Aside";
+import { $Products, TProductInsert } from "@/src/lib/db/schema";
+import { and, eq, inArray } from "drizzle-orm";
 
 export const metadata: Metadata = {
   title: "Каталог",
   description: "",
 };
 
-export default async function Catalog() {
-  await connection();
-  const data = await db.query.$Products.findMany();
+export default async function Catalog({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  let categoryData = (await searchParams).category || "[]";
+
+  if (Array.isArray(categoryData)) {
+    categoryData = "[]";
+  }
+
+  const category: number[] = JSON.parse(categoryData);
+
+  let data: TProductInsert[] = [];
+
+  if (category.length > 0) {
+    data = await db.query.$Products.findMany({
+      where: and(
+        inArray(
+          $Products.categoryId,
+          category.map((c) => Number(c))
+        ),
+        eq($Products.isActive, true)
+      ),
+    });
+  } else {
+    data = await db.query.$Products.findMany({ where: eq($Products.isActive, true) });
+  }
 
   const products: IProductCard[] = data.map((product) => {
     return {

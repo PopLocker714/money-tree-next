@@ -3,10 +3,10 @@ import CategoryTabs, { ICategoryTab } from "./CategoryTabs";
 import DeleteCategory from "./categoryTabs/DeleteCategory";
 import AddCategory from "./categoryTabs/AddCategory";
 import UpdateCategory from "./categoryTabs/UpdateCategory";
-import { getCategory } from "@/src/app/(shop)/actions/getCategoryTree";
+import { getCategoryTree } from "@/src/app/(shop)/actions/getCategoryTree";
 
 export default async function CategoriesBoard() {
-  const categories = await getCategory();
+  const categories = await getCategoryTree();
 
   const tabs: ICategoryTab[] = [
     { id: "0", label: "Добавить", content: <AddCategory /> },
