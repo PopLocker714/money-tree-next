@@ -7,6 +7,9 @@ import { ICartItem } from "@/src/components/app/CardContext";
 import db from "@/src/lib/db/db";
 import { $Products } from "@/src/lib/db/schema";
 import { inArray } from "drizzle-orm";
+import { render } from "@react-email/components";
+import AdminOrder from "@/src/lib/mail/templates/AdminOrder";
+import UserOrder from "@/src/lib/mail/templates/UserOrder";
 
 const orderSchema = z.object({
   firstName: z.string(),
@@ -55,17 +58,19 @@ export const order = async (_: IReturnProductAction, fromData: FormData): Promis
   const data = {
     products: products.map((product) => {
       return {
+        id: product.id,
         title: product.title,
         sku: product.sku,
         quantity: productsCart[product.id].quantity,
         priceTotal: (product.price - (product.discount || 0)) * productsCart[product.id].quantity,
+        preview: product.previewImage,
       };
     }),
   };
 
   const orderId = Math.floor(Math.random() * 1000000);
 
-  const text = `
+  const textTg = `
 <b>Новый заказ</b> &#128276;
 
 Имя: ${validatedFields.data.firstName}
@@ -96,12 +101,30 @@ ${data.products
 #${orderId}
   `;
 
-  sendTgMessage(text);
+  sendTgMessage(textTg);
+
+  const htmlAdmin = await render(<AdminOrder user={validatedFields.data} orderId={orderId} products={data.products} total={total} />, {
+    pretty: true,
+  });
+
+  const htmlUser = await render(<UserOrder orderId={orderId} products={data.products} total={total} />, {
+    pretty: true,
+  });
+
+  // const dirPath = join(process.cwd(), "public", "mail");
+  // const filePath = join(dirPath, `mail.html`);
+  // writeFileSync(filePath, htmlUser);
 
   sendMail({
     to: validatedFields.data.email,
-    subject: "Заказ Денежное дерево",
-    text,
+    subject: `Ваш заказ на сайте Денежное дерево #${orderId}`,
+    text: htmlUser,
+  });
+
+  sendMail({
+    to: process.env.SMTP_TO || "",
+    subject: `Новый заказ Денежное дерево #${orderId}`,
+    text: htmlAdmin,
   });
 
   return {

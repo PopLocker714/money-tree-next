@@ -12,7 +12,9 @@ const getProductsForCart = async (body: Record<string, ICartItem>) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
-  }).then((res) => res.json()).catch((err) => console.log(err));
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
 
   return res;
 };
@@ -22,11 +24,18 @@ export default function ProductListCart() {
   const [products, setProducts] = useState<ICartProduct[]>([]);
   const [total, setTotal] = useState(0);
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
-    getProductsForCart(cart).then((res: ICartResponse) => {
-      setProducts(res.products);
-      setTotal(res.total);
-    });
+    if (Object.keys(cart).length === 0) {
+      setProducts([]);
+      setTotal(0);
+    } else {
+      getProductsForCart(cart).then((res: ICartResponse) => {
+        setProducts(res.products);
+        setTotal(res.total);
+      });
+    }
   }, [cart]);
 
   return (

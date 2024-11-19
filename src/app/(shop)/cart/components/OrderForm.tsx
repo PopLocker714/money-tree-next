@@ -1,23 +1,29 @@
 "use client";
 import Input from "@/src/components/app/ui/components/input/Input";
-import { order } from "../../actions/order";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { IReturnProductAction } from "@/src/app/(cms)/actions/product/types";
 import Textarea from "@/src/components/app/ui/components/input/Textarea";
 import { useCart } from "@/src/components/app/CardContext";
+import { order } from "../../actions/order";
 
 export default function OrderForm() {
-  const { cart, setCart} = useCart();
+  const { cart, setCart } = useCart();
   const [state, action, pending] = useActionState(order, { data: {}, ok: true, error: null } as IReturnProductAction);
   const isEmpty = Object.keys(cart).length === 0;
   const orderId = state.data?.orderId;
 
+  useEffect(() => {
+    if (state.data.orderId) {
+      setCart({});
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.data.orderId]);
+
   if (orderId) {
-    setCart({});
     return (
       <div>
         <p className="text-green-600">
-          Ваш заказ успешно оформлен. Номер вашего заказа: <span className="font-bold">{orderId}</span>сохраните его для уточнения статуса
+          Ваш заказ успешно оформлен. Номер вашего заказа: <span className="font-bold">{orderId}</span> сохраните его для уточнения статуса
         </p>
       </div>
     );

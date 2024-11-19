@@ -22,7 +22,7 @@ declare global {
       SMTP_PASSWORD: TStringEnv;
       SMTP_SECURE: TBoolEnv;
       SMTP_FROM: TStringEnv;
-
+      SMTP_TO: TStringEnv;
     }
   }
 }

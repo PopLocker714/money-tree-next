@@ -13,6 +13,8 @@
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@react-email/components": "^0.0.28",
+    "@react-email/tailwind": "1.0.2",
     "@supabase/supabase-js": "^2.46.1",
     "@tanstack/react-table": "^8.20.5",
     "better-sqlite3": "^11.5.0",
