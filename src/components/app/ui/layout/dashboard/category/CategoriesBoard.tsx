@@ -15,8 +15,8 @@ export default async function CategoriesBoard() {
   ];
 
   return (
-    <section className="container py-6">
-      <div className="flex justify-between ">
+    <section className="py-6">
+      <div className="flex">
         <CategoryTree categories={categories} />
         <CategoryTabs tabs={tabs} />
       </div>

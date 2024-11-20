@@ -1,16 +1,20 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/api/cart/route": "app/api/cart/route.js",
-  "/robots.txt/route": "app/robots.txt/route.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
   "/(cms)/login/page": "app/(cms)/login/page.js",
-  "/(cms)/dashboard/page": "app/(cms)/dashboard/page.js",
-  "/(cms)/dashboard/products/[id]/page": "app/(cms)/dashboard/products/[id]/page.js",
   "/(shop)/page": "app/(shop)/page.js",
   "/(shop)/product/[id]/page": "app/(shop)/product/[id]/page.js",
   "/(shop)/cart/page": "app/(shop)/cart/page.js",
   "/(shop)/order/page": "app/(shop)/order/page.js",
-  "/(shop)/payment/page": "app/(shop)/payment/page.js",
   "/(shop)/catalog/page": "app/(shop)/catalog/page.js",
-  "/(shop)/recall/page": "app/(shop)/recall/page.js"
+  "/(shop)/payment/page": "app/(shop)/payment/page.js",
+  "/(shop)/recall/page": "app/(shop)/recall/page.js",
+  "/(cms)/dashboard/orders/page": "app/(cms)/dashboard/orders/page.js",
+  "/(cms)/dashboard/products/new/page": "app/(cms)/dashboard/products/new/page.js",
+  "/(cms)/dashboard/categories/page": "app/(cms)/dashboard/categories/page.js",
+  "/(cms)/dashboard/page": "app/(cms)/dashboard/page.js",
+  "/(cms)/dashboard/products/page": "app/(cms)/dashboard/products/page.js",
+  "/(cms)/dashboard/products/[id]/page": "app/(cms)/dashboard/products/[id]/page.js"
 }

@@ -8,6 +8,7 @@ export default function Login() {
   return (
     <section className="h-screen flex justify-center items-center">
       <form className="flex flex-col max-w-[400px] w-full" action={formActon}>
+        <h3 className="h3 mb-4">Вход в админ-панель</h3>
         <div className="form-floating mb-3">
           <input required name="email" type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
           <label htmlFor="floatingInput">Адрес электронной почты</label>

@@ -1,8 +1,6 @@
+import db from "@/src/lib/db/db";
 import { Metadata } from "next";
 import { connection } from "next/server";
-import logout from "../actions/auth/logout";
-import CategoriesBoard from "@/src/components/app/ui/layout/dashboard/category/CategoriesBoard";
-import ProductsBoard from "@/src/components/app/ui/layout/dashboard/products/ProductsBoard";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -11,15 +9,20 @@ export const metadata: Metadata = {
 
 export default async function Dashboard() {
   await connection();
+  const productsLength = (await db.query.$Products.findMany()).length;
   return (
-    <main>
-      <section className="container">
-        <form action={logout}>
-          <button type="submit">Logout</button>
-        </form>
-      </section>
-      <CategoriesBoard />
-      <ProductsBoard />
-    </main>
+    <div className="my-6">
+      <h1 className="h3 mb-4">Главная</h1>
+      <div className="row">
+        <div className="col-6 col-sm-3">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Количество товаров</h5>
+              <p className="card-text">{productsLength}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

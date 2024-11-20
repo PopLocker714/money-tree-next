@@ -37,7 +37,7 @@ const ProductSell = () => {
       <h2 className="text-3xl font-medium mb-7">Покупают чаще всего</h2>
       <div className="flex justify-between flex-wrap">
         {products.map((product) => {
-          return <ProductCard key={product.id} {...product} />;
+          return <ProductCard className="mb-4" key={product.id} {...product} />;
         })}
       </div>
     </section>

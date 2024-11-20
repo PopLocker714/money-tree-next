@@ -44,11 +44,11 @@ body {
   }
 }
 
-.swiper-slide__text-container {
+/* .swiper-slide__text-container {
   display: flex;
   flex-direction: column;
   margin-left: 100px;
-}
+} */
 
 /* :root {
   --swiper-theme-color: #007aff;

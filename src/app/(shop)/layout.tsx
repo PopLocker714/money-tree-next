@@ -8,7 +8,7 @@ const montserrat = Montserrat({
 });
 
 import "../globals.css";
-import Nav from "../../components/app/ui/layout/main/Nav";
+import Header from "../../components/app/ui/layout/main/Header";
 import Footer from "../../components/app/ui/layout/main/Footer";
 import { CartProvider } from "@/src/components/app/CardContext";
 
@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="ru">
       <body className={`${montserrat.className} antialiased`}>
         <CartProvider>
-          <Nav />
+          <Header />
           {children}
           <Footer />
         </CartProvider>
