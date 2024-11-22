@@ -1,7 +1,9 @@
+
 import { ProductColumn, TProductColumn } from "@/src/components/app/ui/layout/dashboard/products/ProductColumn";
 import ProductTable from "@/src/components/app/ui/layout/dashboard/products/ProductTable";
 import getAllProducts from "@/src/lib/product/getAllProducts";
 import { Metadata } from "next";
+import { connection } from "next/server";
 
 export const metadata: Metadata = {
   title: "Products Dashboard",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Products() {
+  await connection();
   const res = await getAllProducts();
   const data: TProductColumn[] = res.map((item) => {
     return {
