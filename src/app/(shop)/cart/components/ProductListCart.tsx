@@ -9,7 +9,6 @@ import { getProductsForCart } from "@/src/lib/api/getProductsForCart";
 export default function ProductListCart() {
   const { cart, total, setTotal, deliveryCost } = useCart();
   const [products, setProducts] = useState<ICartProduct[]>([]);
-  // const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (Object.keys(cart).length === 0) {
