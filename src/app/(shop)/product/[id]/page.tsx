@@ -80,7 +80,7 @@ export default async function Product({ params }: TPropsPage) {
         <span className="px-2">/</span>{" "}
         {categoryTree &&
           categoryTree.map((category) => (
-            <>
+            <div key={category.id}>
               <NavLink
                 text={category.name}
                 href={`/catalog?${new URLSearchParams({
@@ -88,7 +88,7 @@ export default async function Product({ params }: TPropsPage) {
                 })}`}
               />
               <span className="px-2">/</span>
-            </>
+            </div>
           ))}{" "}
         {title}
       </div>

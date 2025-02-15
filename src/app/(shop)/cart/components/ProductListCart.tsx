@@ -1,42 +1,27 @@
 "use client";
-import { ICartProduct, ICartResponse } from "@/src/app/api/cart/route";
-import { ICartItem, useCart } from "@/src/components/app/CardContext";
+import { ICartProduct } from "@/src/app/api/cart/route";
+import { useCart } from "@/src/components/app/CardContext";
 import React, { useEffect, useState } from "react";
 import CartTable from "./CartTable";
 import { CartColumn } from "./CartColumn";
-
-const getProductsForCart = async (body: Record<string, ICartItem>) => {
-  const res = await fetch("/api/cart", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
-
-  return res;
-};
+import { getProductsForCart } from "@/src/lib/api/getProductsForCart";
 
 export default function ProductListCart() {
-  const { cart } = useCart();
+  const { cart, total, setTotal, deliveryCost } = useCart();
   const [products, setProducts] = useState<ICartProduct[]>([]);
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {}, []);
+  // const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (Object.keys(cart).length === 0) {
       setProducts([]);
       setTotal(0);
     } else {
-      getProductsForCart(cart).then((res: ICartResponse) => {
+      getProductsForCart(cart).then((res) => {
         setProducts(res.products);
-        setTotal(res.total);
+        setTotal(res.total + deliveryCost);
       });
     }
-  }, [cart]);
+  }, [cart, deliveryCost]);
 
   return (
     <div className="flex flex-col gap-4">

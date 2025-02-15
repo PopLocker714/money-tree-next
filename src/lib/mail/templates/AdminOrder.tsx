@@ -2,15 +2,12 @@ import { Button, Column, Heading, Html, Img, Row, Section, Text } from "@react-e
 import React from "react";
 import TailwindWrapper from "./TailwindWrapper";
 import MailHead from "./MailHead";
+import { costDelivery } from "../../data";
 
-export default function AdminOrder({
-  products,
-  total,
-  user,
-  orderId,
-}: {
+interface IAdminOrderProps {
   products: { sku: string; preview: string | null; id: number; priceTotal: number; quantity: number; title: string }[];
   total: number;
+  deliveryVariant: number;
   user: {
     firstName: string;
     lastName: string;
@@ -20,7 +17,9 @@ export default function AdminOrder({
     comment?: string;
   };
   orderId: number;
-}) {
+}
+
+export default function AdminOrder({ products, total, user, orderId, deliveryVariant }: IAdminOrderProps) {
   const totalFormatted = total.toLocaleString("ru-RU", {
     style: "currency",
     currency: "RUB",
@@ -28,6 +27,8 @@ export default function AdminOrder({
 
   const host = process.env.HOST || "localhost";
   const port = process.env.PORT || 3000;
+
+  const delivery = costDelivery.get(deliveryVariant);
 
   return (
     <TailwindWrapper>
@@ -45,6 +46,7 @@ export default function AdminOrder({
             <Text className="my-[16px] text-2xl text-gray-600">Email: {user.email}</Text>
             <Text className="my-[16px] text-2xl text-gray-600">Адрес: {user.address}</Text>
             <Text className="my-[16px] text-2xl text-gray-600">Комментарий: {user.comment}</Text>
+            <Text className="my-[16px] text-2xl text-gray-600">Доставка: {delivery?.title}</Text>
           </Section>
 
           <Heading as="h2" className="mb-0 text-[30px] font-semibold leading-[36px]">
@@ -91,6 +93,9 @@ export default function AdminOrder({
             </table>
             <Row>
               <Column align="center">
+                <Text className="mb-[16px] text-gray-500">
+                  Доставка: {delivery?.cost?.toLocaleString("ru-RU", { style: "currency", currency: "RUB" })}
+                </Text>
                 <Text className="mb-[16px] text-gray-500">Итого: {totalFormatted}</Text>
                 <Button
                   className="box-border w-full rounded-[8px] bg-indigo-600 px-[12px] py-[12px] text-center font-semibold text-white"

@@ -1,17 +1,17 @@
 import { Button, Column, Heading, Html, Img, Link, Row, Section, Text } from "@react-email/components";
 import React from "react";
+import { costDelivery } from "@/src/lib/data";
 import TailwindWrapper from "./TailwindWrapper";
 import MailHead from "./MailHead";
 
-export default function UserOrder({
-  products,
-  total,
-  orderId,
-}: {
+interface IUserOrderProps {
   products: { sku: string; preview: string | null; id: number; priceTotal: number; quantity: number; title: string }[];
   total: number;
   orderId: number;
-}) {
+  deliveryVariant: number;
+}
+
+export default function UserOrder({ products, total, orderId, deliveryVariant }: IUserOrderProps) {
   const totalFormatted = total.toLocaleString("ru-RU", {
     style: "currency",
     currency: "RUB",
@@ -19,6 +19,8 @@ export default function UserOrder({
 
   const host = process.env.HOST || "localhost";
   const port = process.env.PORT || 3000;
+
+  const delivery = costDelivery.get(deliveryVariant);
 
   return (
     <TailwindWrapper>
@@ -72,6 +74,9 @@ export default function UserOrder({
             </table>
             <Row>
               <Column align="center">
+                <Text className="mb-3 text-gray-500">
+                  Доставка: {delivery?.cost?.toLocaleString("ru-RU", { style: "currency", currency: "RUB" })}
+                </Text>
                 <Text className="mb-[16px] text-gray-500">
                   Итого: <span className="font-semibold">{totalFormatted}</span>
                 </Text>

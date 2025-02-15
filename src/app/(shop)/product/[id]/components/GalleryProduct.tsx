@@ -14,7 +14,7 @@ export default function GalleryProduct({ images, preview }: { images: string; pr
     const imageArray: TImageItem[] = JSON.parse(images);
     imageArray.push(preview);
     setImagesData(imageArray);
-  }, [images]);
+  }, [images, preview]);
 
   return (
     <Swiper

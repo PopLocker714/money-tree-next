@@ -10,6 +10,7 @@ import { inArray } from "drizzle-orm";
 import { render } from "@react-email/components";
 import AdminOrder from "@/src/lib/mail/templates/AdminOrder";
 import UserOrder from "@/src/lib/mail/templates/UserOrder";
+import { costDelivery } from "@/src/lib/data";
 
 const orderSchema = z.object({
   firstName: z.string(),
@@ -19,6 +20,7 @@ const orderSchema = z.object({
   address: z.string(),
   products: z.string(),
   comment: z.string().optional(),
+  delivery: z.string(),
 });
 
 export const order = async (_: IReturnProductAction, fromData: FormData): Promise<IReturnProductAction> => {
@@ -30,6 +32,7 @@ export const order = async (_: IReturnProductAction, fromData: FormData): Promis
     address: fromData.get("address"),
     products: fromData.get("products"),
     comment: fromData.get("comment"),
+    delivery: fromData.get("delivery"),
   });
 
   if (!validatedFields.success) {
@@ -51,22 +54,24 @@ export const order = async (_: IReturnProductAction, fromData: FormData): Promis
 
   let total = 0;
 
-  products.forEach((product) => {
-    total += (product.price - (product.discount || 0)) * productsCart[product.id].quantity;
-  });
+  const deliveryData = costDelivery.get(Number(validatedFields.data.delivery));
 
   const data = {
     products: products.map((product) => {
+      const priceTotal = (product.price - (product.discount || 0)) * productsCart[product.id].quantity;
+      total += priceTotal;
       return {
         id: product.id,
         title: product.title,
         sku: product.sku,
         quantity: productsCart[product.id].quantity,
-        priceTotal: (product.price - (product.discount || 0)) * productsCart[product.id].quantity,
+        priceTotal,
         preview: product.previewImage,
       };
     }),
   };
+
+  total += deliveryData?.cost || 0;
 
   const orderId = Math.floor(Math.random() * 1000000);
 
@@ -79,6 +84,7 @@ export const order = async (_: IReturnProductAction, fromData: FormData): Promis
 Email: ${validatedFields.data.email}
 Адрес доставки: <code>${validatedFields.data.address}</code>
 ${validatedFields.data.comment && `Примечание: ${validatedFields.data.comment}`}
+Вариант доставки: ${deliveryData?.title}
 
 <b>Товары:</b>
 ${data.products
@@ -94,6 +100,10 @@ ${data.products
 `;
   })
   .join("")}
+Доставка: ${new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    currency: "RUB",
+  }).format(deliveryData?.cost || 0)}
 <b>Итого:</b> ${new Intl.NumberFormat("ru-RU", {
     style: "currency",
     currency: "RUB",
@@ -103,13 +113,25 @@ ${data.products
 
   sendTgMessage(textTg);
 
-  const htmlAdmin = await render(<AdminOrder user={validatedFields.data} orderId={orderId} products={data.products} total={total} />, {
-    pretty: true,
-  });
+  const htmlAdmin = await render(
+    <AdminOrder
+      deliveryVariant={Number(validatedFields.data.delivery)}
+      user={validatedFields.data}
+      orderId={orderId}
+      products={data.products}
+      total={total}
+    />,
+    {
+      pretty: true,
+    }
+  );
 
-  const htmlUser = await render(<UserOrder orderId={orderId} products={data.products} total={total} />, {
-    pretty: true,
-  });
+  const htmlUser = await render(
+    <UserOrder deliveryVariant={Number(validatedFields.data.delivery)} orderId={orderId} products={data.products} total={total} />,
+    {
+      pretty: true,
+    }
+  );
 
   // const dirPath = join(process.cwd(), "public", "mail");
   // const filePath = join(dirPath, `mail.html`);
