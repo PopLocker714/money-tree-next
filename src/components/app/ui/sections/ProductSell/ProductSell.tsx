@@ -1,40 +1,35 @@
-import ProductCard from "./ProductCard";
+import { unstable_cache } from "next/cache";
+import ProductCard, { IProductCard } from "./ProductCard";
+import db from "@/src/lib/db/db";
+import { and, eq } from "drizzle-orm";
+import { $Products } from "@/src/lib/db/schema";
 
-export const products = [
-  {
-    title: "Цветкок бромелиевыхв горшке",
-    image: "/products/product-1.jpg",
-    id: "123412323412",
-    cost: 1000,
-    discount: 0,
+const getCachedProducts = unstable_cache(
+  async (): Promise<IProductCard[]> => {
+    return await db.query.$Products
+      .findMany({
+        where: and(eq($Products.isFeatured, true), eq($Products.isActive, true)),
+        limit: 4,
+      })
+      .then((res) =>
+        res.map((item) => ({
+          id: item.id.toString(),
+          title: item.title,
+          image: item.previewImage,
+          cost: item.price,
+          discount: item.discount || 0,
+        }))
+      );
   },
-  {
-    title: "Цветкок бромелиевыхв горшке",
-    image: "/products/product-2.jpg",
-    id: "1298751283",
-    cost: 2300,
-    discount: 0,
-  },
-  {
-    title: "Цветкок бромелиевыхв горшке",
-    image: "/products/product-3.jpg",
-    id: "123423029",
-    cost: 2300,
-    discount: 300,
-  },
-  {
-    title: "Цветкок бромелиевыхв горшке",
-    image: "/products/product-4.jpg",
-    id: "88888888",
-    cost: 2300,
-    discount: 0,
-  },
-];
+  ["product-home"],
+  { revalidate: 3600, tags: ["product-home"] }
+);
 
-const ProductSell = () => {
+const ProductSell = async () => {
+  const products = await getCachedProducts();
   return (
     <section className="container">
-      <h2 className="text-3xl font-medium mb-7">Покупают чаще всего</h2>
+      <h2 className="text-3xl font-medium mb-7">Рекомендуемые товары</h2>
       <div className="flex justify-between flex-wrap">
         {products.map((product) => {
           return <ProductCard className="mb-4" key={product.id} {...product} />;

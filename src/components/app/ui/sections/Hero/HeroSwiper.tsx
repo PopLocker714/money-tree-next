@@ -28,7 +28,12 @@ const heroSlides = [
 export default function HeroSwiper() {
   return (
     <Swiper
-      virtual
+      // virtual
+      loop
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
       navigation={{
         enabled: true,
         nextEl: ".swiper-button-next__hero",
@@ -40,11 +45,11 @@ export default function HeroSwiper() {
       }}
       direction="horizontal"
       modules={[Virtual, Navigation, Pagination, Autoplay]}
-      className="swiper swiper__hero"
+      className="swiper swiper__hero rounded-xl"
     >
       {heroSlides.map((slide, index) => {
         return (
-          <SwiperSlide key={index} virtualIndex={index} className={`${slide.bgColor}`}>
+          <SwiperSlide key={`slide-${index}`} virtualIndex={index} className={`${slide.bgColor}`}>
             <HeroSlideItem {...slide} />
           </SwiperSlide>
         );

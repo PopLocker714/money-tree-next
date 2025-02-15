@@ -4,6 +4,7 @@ import { $Products } from "@/src/lib/db/schema";
 import deleteFile from "@/src/lib/files/deleteFile";
 import { eq } from "drizzle-orm";
 import { IReturnProductAction, TImageItem } from "./types";
+import { revalidateTag } from "next/cache";
 
 export async function deleteProductActon(_: unknown, fromData: FormData): Promise<IReturnProductAction> {
   const productId = fromData.get("id");
@@ -33,6 +34,8 @@ export async function deleteProductActon(_: unknown, fromData: FormData): Promis
     }
 
     const res = await db.delete($Products).where(eq($Products.id, Number(productId)));
+
+    revalidateTag("product-home");
 
     return {
       error: null,

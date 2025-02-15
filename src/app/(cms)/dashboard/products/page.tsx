@@ -1,4 +1,3 @@
-
 import { ProductColumn, TProductColumn } from "@/src/components/app/ui/layout/dashboard/products/ProductColumn";
 import ProductTable from "@/src/components/app/ui/layout/dashboard/products/ProductTable";
 import getAllProducts from "@/src/lib/product/getAllProducts";

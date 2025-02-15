@@ -1,0 +1,1 @@
+{"kind":"FETCH","data":{"headers":{},"body":"[{\"id\":3,\"title\":\"Розы\",\"image\":\"https://ulqumkttxuiznqmcntaj.supabase.co/storage/v1/object/public/products/preview_efbd9da7-295f-4e03-b7f3-431f3ea37edb\",\"cost\":288,\"discount\":100}]","status":200,"url":""},"revalidate":3600,"tags":["posts"]}

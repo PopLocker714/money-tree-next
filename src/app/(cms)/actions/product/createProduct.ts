@@ -3,6 +3,7 @@ import db from "@/src/lib/db/db";
 import { $Products, insertProductSchema } from "@/src/lib/db/schema";
 import saveFile from "@/src/lib/files/saveFile";
 import { IReturnProductAction, TImageItem, TImageItemPromise } from "./types";
+import { revalidateTag } from "next/cache";
 
 export default async function createProductActon(_: IReturnProductAction, fromData: FormData): Promise<IReturnProductAction> {
   const validatedFields = insertProductSchema.safeParse({
@@ -70,8 +71,6 @@ export default async function createProductActon(_: IReturnProductAction, fromDa
     }
   }
 
-  console.log("promise images", await Promise.all(imagesPromise));
-
   const images = await Promise.all(imagesPromise)
     .then((images) => JSON.stringify(images))
     .catch((error) => {
@@ -107,6 +106,7 @@ export default async function createProductActon(_: IReturnProductAction, fromDa
 
   try {
     await db.insert($Products).values({ ...validatedFields.data, previewImage, images });
+    revalidateTag("product-home");
 
     return {
       ok: true,

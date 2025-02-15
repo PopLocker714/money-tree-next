@@ -5,6 +5,7 @@ import deleteFile from "@/src/lib/files/deleteFile";
 import saveFile from "@/src/lib/files/saveFile";
 import { eq } from "drizzle-orm";
 import { IReturnProductAction, TImageItem, TImageItemPromise } from "./types";
+import { revalidateTag } from "next/cache";
 
 export default async function updateProductActon(_: IReturnProductAction, fromData: FormData): Promise<IReturnProductAction> {
   const validatedFields = insertProductSchema.safeParse({
@@ -144,11 +145,9 @@ export default async function updateProductActon(_: IReturnProductAction, fromDa
       images,
     };
 
-    const result = await db.update($Products)
-      .set(updatedProduct)
-      .where(eq($Products.id, validatedFields.data.id))
-      .returning();
+    const result = await db.update($Products).set(updatedProduct).where(eq($Products.id, validatedFields.data.id)).returning();
 
+    revalidateTag("product-home");
     return {
       error: null,
       data: result,
