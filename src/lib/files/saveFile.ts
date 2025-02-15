@@ -8,7 +8,7 @@ export default async function saveFile(file: Blob, prefix = "") {
   const { data, error } = await supabase.storage.from("products").upload(`${!!prefix ? prefix + "_" : ""}${randomUUID()}`, file);
 
   if (error) {
-    console.log("SAVE FILE ERROR",error);
+    console.log("SAVE FILE ERROR", error);
 
     return {
       ok: false,

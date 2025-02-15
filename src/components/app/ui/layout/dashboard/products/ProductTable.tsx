@@ -52,7 +52,7 @@ export default function ProductTable<TValue>({ columns, data }: DataTableProps<T
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  Похоже ничего не нашлось
                 </TableCell>
               </TableRow>
             )}

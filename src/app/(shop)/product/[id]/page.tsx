@@ -95,7 +95,7 @@ export default async function Product({ params }: TPropsPage) {
 
       <div className="flex justify-between mb-4">
         <div className="flex-1 max-w-[48%]">
-          <GalleryProduct images={product.images} />
+          <GalleryProduct images={product.images} preview={product.previewImage || ""} />
         </div>
         <div className="flex-1 max-w-[48%] relative">
           <h1 className="text-3xl mb-4">{product.title}</h1>

@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${montserrat.className} antialiased`}>
+      <body className={`${montserrat.className} antialiased flex flex-col min-h-screen min-w-80`}>
         <CartProvider>
           <Header />
           {children}
