@@ -4,17 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CategoryItem from "./CategoryItem";
 import RightArrow from "../../components/slider/RightArrow";
 import LeftArrow from "../../components/slider/LeftArrow";
-const categories = [
-  { title: "Розы", image: "/categories/rouse.png" },
-  { title: "Готовые букеты", image: "/categories/buket.png" },
-  { title: "Горшки", image: "/categories/pot.png" },
-  { title: "Суккулент", image: "/categories/sykylent.png" },
-  { title: "Готовые наборы", image: "/categories/nabor.png" },
-  { title: "Еще категория", image: "/categories/rouse.png" },
-  { title: "Еще категория", image: "/categories/rouse.png" },
-];
 
-function CategoriesList() {
+function CategoriesList({ categories }: { categories: { title: string; image: string }[] }) {
   return (
     <section className="container my-9  mb-12">
       <div className="relative">
@@ -32,7 +23,7 @@ function CategoriesList() {
               spaceBetween: 24,
             },
             1087: {
-              slidesPerView: 5,
+              slidesPerView: 4,
               spaceBetween: 24,
             },
           }}

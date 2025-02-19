@@ -9,22 +9,37 @@
     "hero": {
       "slides": [
         {
-          "title": "test test test",
+          "title": "Cвой яблоневый сад",
           "subTitle": "Создайте",
           "btn": "Узнать подробнее",
           "bgColor": "swiper-slide__ks__bg-1"
         },
+
         {
-          "title": "Cуккулентов и толстянок",
+          "title": "Хвойных деревьев",
           "subTitle": "Широкий выбор ",
           "btn": "Узнать подробнее",
           "bgColor": "swiper-slide__ks__bg-2"
         },
         {
-          "title": "Грунты, горшки и кашпо",
+          "title": "Большой ассортимент декоративных кустарников",
           "btn": "Узнать подробнее",
           "bgColor": "swiper-slide__ks__bg-3"
+        },
+        {
+          "title": "Cвой яблоневый сад",
+          "subTitle": "Создайте",
+          "btn": "Узнать подробнее",
+          "bgColor": "swiper-slide__ks__bg-4"
         }
+      ]
+    },
+    "categories": {
+      "data": [
+        { "title": "Плодовые деревья", "image": "/kupit-sajenci/categories/01.png" },
+        { "title": "Хвойные деревьяи кустарники", "image": "/kupit-sajenci/categories/02.png" },
+        { "title": "Плодовые кустарники", "image": "/kupit-sajenci/categories/03.png" },
+        { "title": "Декоративные кустарники", "image": "/kupit-sajenci/categories/04.png" }
       ]
     }
   }

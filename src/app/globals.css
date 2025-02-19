@@ -824,6 +824,14 @@ button.swiper-pagination-bullet {
   background-position: 100% 0%;
 }
 
+.swiper-slide__ks__bg-4 {
+  background-color: #fcf0f0;
+  background-image: url("/kupit-sajenci/banner/04.png");
+  background-size: 479px 312px;
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

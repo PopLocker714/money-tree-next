@@ -1,11 +1,11 @@
 import mtData from "@/src/config/money-tree.config.json";
 import ksData from "@/src/config/kupit-sajenci.json";
-import config from '@/config.json'
+import { env } from "process";
 
 type TConf = typeof ksData;
 
 export const conf = (): TConf => {
-  switch (config.projectName) {
+  switch (env.PROJECT_NAME) {
     case "kupit-sajenci":
       return ksData;
     case "money-tree":
@@ -40,6 +40,9 @@ export const conf = (): TConf => {
               },
             ],
           },
+          "categories": {
+            "data": []
+          }
         },
       };
   }
