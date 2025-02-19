@@ -5,27 +5,21 @@ import HeroSlideItem from "./HeroSlideItem";
 import RightArrow from "../../components/slider/RightArrow";
 import LeftArrow from "../../components/slider/LeftArrow";
 
-const heroSlides = [
-  {
-    title: "Cвой зеленый уголок",
-    subTitle: "Создайте",
-    btn: "Узнать подробнее",
-    bgColor: "swiper-slide__bg-1",
-  },
-  {
-    title: "Cуккулентов и толстянок",
-    subTitle: "Широкий выбор ",
-    btn: "Узнать подробнее",
-    bgColor: "swiper-slide__bg-2",
-  },
-  {
-    title: "Грунты, горшки и кашпо",
-    btn: "Узнать подробнее",
-    bgColor: "swiper-slide__bg-3",
-  },
-];
+type TSlide =
+  | {
+      title: string;
+      subTitle: string;
+      btn: string;
+      bgColor: string;
+    }
+  | {
+      title: string;
+      btn: string;
+      bgColor: string;
+      subTitle?: undefined;
+    };
 
-export default function HeroSwiper() {
+export default function HeroSwiper({ data }: { data: TSlide[] }) {
   return (
     <Swiper
       // virtual
@@ -47,9 +41,13 @@ export default function HeroSwiper() {
       modules={[Virtual, Navigation, Pagination, Autoplay]}
       className="swiper swiper__hero rounded-xl"
     >
-      {heroSlides.map((slide, index) => {
+      {data.map((slide, index) => {
         return (
-          <SwiperSlide key={`slide-${index}`} virtualIndex={index} className={`${slide.bgColor}`}>
+          <SwiperSlide
+            key={`slide-${index}`}
+            virtualIndex={index}
+            className={`${slide.bgColor}`}
+          >
             <HeroSlideItem {...slide} />
           </SwiperSlide>
         );

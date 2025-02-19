@@ -23,6 +23,7 @@ declare global {
       SMTP_SECURE: TBoolEnv;
       SMTP_FROM: TStringEnv;
       SMTP_TO: TStringEnv;
+      PROJECT_NAME: "money-tree" | "kupit-sajenci";
     }
   }
 }

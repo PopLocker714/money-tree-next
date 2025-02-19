@@ -66,7 +66,6 @@ body {
   height: 312px;
 }
 
-
 .swiper {
   margin-left: auto;
   margin-right: auto;
@@ -88,7 +87,10 @@ body {
   z-index: 1;
   display: flex;
   transition-property: transform;
-  transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+  transition-timing-function: var(
+    --swiper-wrapper-transition-timing-function,
+    initial
+  );
   box-sizing: content-box;
 }
 .swiper-android .swiper-slide,
@@ -172,7 +174,9 @@ body {
   scroll-snap-align: center center;
   scroll-snap-stop: always;
 }
-.swiper-css-mode.swiper-centered.swiper-horizontal > .swiper-wrapper > .swiper-slide:first-child {
+.swiper-css-mode.swiper-centered.swiper-horizontal
+  > .swiper-wrapper
+  > .swiper-slide:first-child {
   margin-inline-start: var(--swiper-centered-offset-before);
 }
 .swiper-css-mode.swiper-centered.swiper-horizontal > .swiper-wrapper::before {
@@ -180,7 +184,9 @@ body {
   min-height: 1px;
   width: var(--swiper-centered-offset-after);
 }
-.swiper-css-mode.swiper-centered.swiper-vertical > .swiper-wrapper > .swiper-slide:first-child {
+.swiper-css-mode.swiper-centered.swiper-vertical
+  > .swiper-wrapper
+  > .swiper-slide:first-child {
   margin-block-start: var(--swiper-centered-offset-before);
 }
 .swiper-css-mode.swiper-centered.swiper-vertical > .swiper-wrapper::before {
@@ -205,16 +211,32 @@ body {
   background: rgba(0, 0, 0, 0.15);
 }
 .swiper-3d .swiper-slide-shadow-left {
-  background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
 }
 .swiper-3d .swiper-slide-shadow-right {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
 }
 .swiper-3d .swiper-slide-shadow-top {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
 }
 .swiper-3d .swiper-slide-shadow-bottom {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
 }
 .swiper-lazy-preloader {
   width: 42px;
@@ -428,8 +450,14 @@ body {
   transform: scale(0.33);
 }
 .swiper-pagination-bullet {
-  width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 8px));
-  height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 8px));
+  width: var(
+    --swiper-pagination-bullet-width,
+    var(--swiper-pagination-bullet-size, 8px)
+  );
+  height: var(
+    --swiper-pagination-bullet-height,
+    var(--swiper-pagination-bullet-size, 8px)
+  );
   display: inline-block;
   border-radius: var(--swiper-pagination-bullet-border-radius, 50%);
   background: var(--swiper-pagination-bullet-inactive-color, #000);
@@ -466,38 +494,52 @@ button.swiper-pagination-bullet {
   display: block;
 }
 .swiper-pagination-vertical.swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
-.swiper-vertical > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+.swiper-vertical
+  > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
   top: 50%;
   transform: translateY(-50%);
   width: 8px;
 }
-.swiper-pagination-vertical.swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet,
-.swiper-vertical > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+.swiper-pagination-vertical.swiper-pagination-bullets.swiper-pagination-bullets-dynamic
+  .swiper-pagination-bullet,
+.swiper-vertical
+  > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic
+  .swiper-pagination-bullet {
   display: inline-block;
   transition: 0.2s transform, 0.2s top;
 }
 .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
-.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+.swiper-pagination-horizontal.swiper-pagination-bullets
+  .swiper-pagination-bullet {
   margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 4px);
 }
-.swiper-horizontal > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
+.swiper-horizontal
+  > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
 .swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
 }
-.swiper-horizontal > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet,
-.swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+.swiper-horizontal
+  > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic
+  .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic
+  .swiper-pagination-bullet {
   transition: 0.2s transform, 0.2s left;
 }
-.swiper-horizontal.swiper-rtl > .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+.swiper-horizontal.swiper-rtl
+  > .swiper-pagination-bullets-dynamic
+  .swiper-pagination-bullet {
   transition: 0.2s transform, 0.2s right;
 }
 .swiper-pagination-fraction {
   color: var(--swiper-pagination-fraction-color, inherit);
 }
 .swiper-pagination-progressbar {
-  background: var(--swiper-pagination-progressbar-bg-color, rgba(0, 0, 0, 0.25));
+  background: var(
+    --swiper-pagination-progressbar-bg-color,
+    rgba(0, 0, 0, 0.25)
+  );
   position: absolute;
 }
 .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
@@ -516,13 +558,15 @@ button.swiper-pagination-bullet {
 .swiper-horizontal > .swiper-pagination-progressbar,
 .swiper-pagination-progressbar.swiper-pagination-horizontal,
 .swiper-pagination-progressbar.swiper-pagination-vertical.swiper-pagination-progressbar-opposite,
-.swiper-vertical > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
+.swiper-vertical
+  > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
   width: 100%;
   height: var(--swiper-pagination-progressbar-size, 4px);
   left: 0;
   top: 0;
 }
-.swiper-horizontal > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite,
+.swiper-horizontal
+  > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite,
 .swiper-pagination-progressbar.swiper-pagination-horizontal.swiper-pagination-progressbar-opposite,
 .swiper-pagination-progressbar.swiper-pagination-vertical,
 .swiper-vertical > .swiper-pagination-progressbar {
@@ -733,33 +777,55 @@ button.swiper-pagination-bullet {
   overflow: hidden;
 }
 
-.swiper-slide__bg-1 {
+.swiper-slide__mt__bg-1 {
   background-color: #f0fcf6;
-  background-image: url("/banner/01.png");
+  background-image: url("/money-tree/banner/01.png");
   background-size: 617px 484px;
   background-repeat: no-repeat;
   background-position: 130% 15%;
 }
 
-.swiper-slide__bg-2 {
+.swiper-slide__mt__bg-2 {
   background-color: #faf0fc;
-  background-image: url("/banner/02.png");
+  background-image: url("/money-tree/banner/02.png");
   background-size: 407px 401px;
   background-repeat: no-repeat;
   background-position: 100% 15%;
 }
 
-.swiper-slide__bg-3 {
+.swiper-slide__mt__bg-3 {
   background-color: #fcf0f0;
-  background-image: url("/banner/03.png");
+  background-image: url("/money-tree/banner/03.png");
   background-size: 417px 383px;
   background-repeat: no-repeat;
   background-position: 100% 15%;
 }
+.swiper-slide__ks__bg-1 {
+  background-color: #f0fcf6;
+  background-image: url("/kupit-sajenci/banner/01.png");
+  background-size: 534px 312px;
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+}
+
+.swiper-slide__ks__bg-2 {
+  background-color: #faf0fc;
+  background-image: url("/kupit-sajenci/banner/02.png");
+  background-size: 534px 312px;
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+}
+
+.swiper-slide__ks__bg-3 {
+  background-color: #fcf0f0;
+  background-image: url("/kupit-sajenci/banner/03.png");
+  background-size: 534px 312px;
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+}
 
 @layer base {
   :root {
-
     --background: 0 0% 100%;
 
     --foreground: 0 0% 3.9%;
@@ -811,7 +877,6 @@ button.swiper-pagination-bullet {
     --radius: 0.5rem;
   }
   .dark {
-
     --background: 0 0% 3.9%;
 
     --foreground: 0 0% 98%;

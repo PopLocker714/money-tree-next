@@ -1,14 +1,27 @@
 import Link from "next/link";
 import Logo from "../../components/Logo";
+import { conf } from "@/src/config/conf";
 
 export default function Footer() {
+  const config = conf()
   return (
     <footer className="container mx-auto flex-1 flex flex-col justify-end m-4">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <Link href="/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-            {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" /> */}
-            <Logo width={172} alt="Денежное дерево" height={56} src={"/Logo.png"} />
+          <Link
+            href="/"
+            className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
+          >
+            <Logo
+              style={{
+                maxHeight: config.content.logo.height,
+                maxWidth: config.content.logo.width,
+              }}
+              width={config.content.logo.width}
+              alt={config.title}
+              height={config.content.logo.height}
+              src={`/${config.name}/Logo.png`}
+            />
             {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> */}
           </Link>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
@@ -45,16 +58,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-  // return (
-  //   <footer className="container mx-auto flex-1 flex flex-col justify-end ">
-  //     <div className="border-t py-4">
-  //       <div className="flex justify-end items-center">
-  //         <Whatsapp className="mr-2" />
-  //         <Whatsapp className="mr-2" />
-  //         <Whatsapp />
-  //       </div>
-  //       <p className="text-center ">© "Дистира ООО" 2025. Все права защищены</p>
-  //     </div>
-  //   </footer>
-  // );
 }

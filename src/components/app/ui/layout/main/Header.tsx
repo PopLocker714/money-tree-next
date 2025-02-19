@@ -3,41 +3,61 @@ import Logo from "../../components/Logo";
 import NavLink from "./NavLink";
 import CardCount from "./components/CardCount";
 import Whatsapp from "../../components/Whatsapp";
+import { conf } from "@/src/config/conf";
 
 export default function Header() {
+  const config = conf();
   return (
     <header className="container mx-auto">
-      <div className="flex justify-between flex-wrap pt-4 pb-2">
-        <nav className="flex flex-1 min-w-[280px] max-w-[280px] justify-between">
-          <NavLink text="Статьи" href="/" />
-          <NavLink text="Доставка" href="/order" />
-          <NavLink text="Оплата" href="/payment" />
-        </nav>
-        <nav className="flex flex-wrap justify-between items-center w-[380px]">
-          <NavLink text="Обратный звонок" href="/recall" />
+      {config.name === "money-tree" && (
+        <div className="flex justify-between flex-wrap pt-4 pb-2">
+          <nav className="flex flex-1 min-w-[280px] max-w-[280px] justify-between">
+            <NavLink text="Статьи" href="/" />
+            <NavLink text="Доставка" href="/order" />
+            <NavLink text="Оплата" href="/payment" />
+          </nav>
+          <nav className="flex flex-wrap justify-between items-center w-[380px]">
+            <NavLink text="Обратный звонок" href="/recall" />
 
-          <span className="bg-gray-300 w-[1px] h-[20px]"></span>
+            <span className="bg-gray-300 w-[1px] h-[20px]"></span>
 
-          <a className="text-green-400 font-medium" href="tel:+79001111111">
-            +7-900-111-11-11
-          </a>
+            <a className="text-green-400 font-medium" href="tel:+79001111111">
+              +7-900-111-11-11
+            </a>
 
-          <span className="bg-gray-300 w-[1px] h-[20px]"></span>
+            <span className="bg-gray-300 w-[1px] h-[20px]"></span>
 
-          <Whatsapp />
-        </nav>
-      </div>
+            <Whatsapp />
+          </nav>
+        </div>
+      )}
 
       <span className="flex bg-gray-100 w-full h-[1px] mb-2"></span>
 
       <div className="flex justify-between items-center ">
         <nav className="flex items-center justify-between max-w-[320px] w-full">
           <Link href={"/"}>
-            <Logo width={172} alt="Денежное дерево" height={56} src={"/Logo.png"} />
+            <Logo
+              style={{
+                maxHeight: config.content.logo.height,
+                maxWidth: config.content.logo.width,
+              }}
+              width={config.content.logo.width}
+              alt={config.title}
+              height={config.content.logo.height}
+              src={`/${config.name}/Logo.png`}
+            />
           </Link>
 
           <Link className="text-green-400 flex items-center" href="/catalog">
-            <svg className="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              className="mr-2"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M2.5 6.5C2.5 4.61438 2.5 3.67157 3.08579 3.08579C3.67157 2.5 4.61438 2.5 6.5 2.5C8.38562 2.5 9.32843 2.5 9.91421 3.08579C10.5 3.67157 10.5 4.61438 10.5 6.5C10.5 8.38562 10.5 9.32843 9.91421 9.91421C9.32843 10.5 8.38562 10.5 6.5 10.5C4.61438 10.5 3.67157 10.5 3.08579 9.91421C2.5 9.32843 2.5 8.38562 2.5 6.5Z"
                 stroke="currentColor"
@@ -64,7 +84,13 @@ export default function Header() {
         </nav>
         <nav className="flex">
           <Link aria-label="Корзина" href="/cart">
-            <svg className="text-gray-400" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none">
+            <svg
+              className="text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="none"
+            >
               <path
                 stroke="currentColor"
                 strokeLinecap="round"

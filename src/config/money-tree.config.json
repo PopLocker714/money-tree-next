@@ -1,0 +1,31 @@
+{
+  "title": "Денежное дерево",
+  "name": "money-tree",
+  "content": {
+    "logo": {
+      "width": 172,
+      "height": 56
+    },
+    "hero": {
+      "slides": [
+        {
+          "title": "Cвой зеленый уголок",
+          "subTitle": "Создайте",
+          "btn": "Узнать подробнее",
+          "bgColor": "swiper-slide__mt__bg-1"
+        },
+        {
+          "title": "Cуккулентов и толстянок",
+          "subTitle": "Широкий выбор ",
+          "btn": "Узнать подробнее",
+          "bgColor": "swiper-slide__mt__bg-2"
+        },
+        {
+          "title": "Грунты, горшки и кашпо",
+          "btn": "Узнать подробнее",
+          "bgColor": "swiper-slide__mt__bg-3"
+        }
+      ]
+    }
+  }
+}

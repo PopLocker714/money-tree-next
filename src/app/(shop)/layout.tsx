@@ -11,9 +11,10 @@ import "../globals.css";
 import Header from "../../components/app/ui/layout/main/Header";
 import Footer from "../../components/app/ui/layout/main/Footer";
 import { CartProvider } from "@/src/components/app/CardContext";
+import { conf } from "@/src/config/conf";
 
 export const metadata: Metadata = {
-  title: "Денежное дерево",
+  title: conf().title,
   description: "",
 };
 
@@ -29,7 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${montserrat.className} antialiased flex flex-col min-h-screen min-w-80`}>
+      <body
+        className={`${montserrat.className} antialiased flex flex-col min-h-screen min-w-80`}
+      >
         <CartProvider>
           <Header />
           {children}
