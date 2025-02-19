@@ -1,12 +1,13 @@
 {
   "name": "money-tree-next",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 4000",
-    "start:prod": "next start -H xn----dtbebdaacaf9ecng1a.xn--80adxhks -p 42109",
+    "start:prod:mt": "next start -H xn----dtbebdaacaf9ecng1a.xn--80adxhks -p 42109",
+    "start:prod:ks": "next start -H xn----8sbpdhl0akuii9b0dg.su -p 42124",
     "lint": "next lint",
     "studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",
