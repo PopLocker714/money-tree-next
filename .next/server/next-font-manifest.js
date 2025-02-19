@@ -1,1 +1,1 @@
-self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/jojo/Documents/Projects/money-tree-next/src/app/(shop)/layout\":[\"static/media/6325a8417175c41d-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/jojo/Documents/Projects/money-tree-next/src/app/(shop)/layout":["static/media/6325a8417175c41d-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
