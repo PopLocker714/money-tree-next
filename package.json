@@ -1,6 +1,6 @@
 {
   "name": "money-tree-next",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -18,7 +18,7 @@
     "@react-email/tailwind": "1.0.2",
     "@supabase/supabase-js": "^2.46.1",
     "@tanstack/react-table": "^8.20.5",
-    "better-sqlite3": "^11.5.0",
+    "better-sqlite3": "^11.8.1",
     "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -42,7 +42,7 @@
     "@types/nodemailer": "^6.4.16",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "drizzle-kit": "^0.26.2",
+    "drizzle-kit": "^0.30.4",
     "eslint": "^9",
     "eslint-config-next": "15.0.1",
     "postcss": "^8",
