@@ -15,6 +15,6 @@
   "/(cms)/dashboard/orders/page": "app/(cms)/dashboard/orders/page.js",
   "/(cms)/dashboard/products/new/page": "app/(cms)/dashboard/products/new/page.js",
   "/(cms)/dashboard/products/page": "app/(cms)/dashboard/products/page.js",
-  "/(cms)/dashboard/page": "app/(cms)/dashboard/page.js",
-  "/(cms)/dashboard/products/[id]/page": "app/(cms)/dashboard/products/[id]/page.js"
+  "/(cms)/dashboard/products/[id]/page": "app/(cms)/dashboard/products/[id]/page.js",
+  "/(cms)/dashboard/page": "app/(cms)/dashboard/page.js"
 }
