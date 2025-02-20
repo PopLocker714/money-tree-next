@@ -1,8 +1,14 @@
 import Link from "next/link";
 
-const CategoryItem = ({ title, image }: { title: string; image: string }) => {
+export interface ICategoryItem {
+  title: string;
+  image: string;
+  url: string;
+}
+
+const CategoryItem = ({ title, image, url }: ICategoryItem) => {
   return (
-    <Link href="/catalog" style={styleItem(image)} className="swiper-slide">
+    <Link href={url} style={styleItem(image)} className="swiper-slide">
       {title}
     </Link>
   );

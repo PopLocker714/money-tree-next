@@ -15,8 +15,6 @@ export interface IProductCard {
 function ProductCard({ cost = 0, discount, id, image, title, className }: IProductCard) {
   return (
     <Link
-      // className="relative flex flex-col overflow-hidden max-w-[266px] rounded-3xl shadow-[0px_0px_16px_0_rgba(51,37,87,0.15)]"
-      //
       className={clsx(
         "relative flex flex-col overflow-hidden max-w-[266px] rounded-3xl shadow-[0px_0px_16px_0_rgba(51,37,87,0.15)] transition-shadow hover:shadow-[0px_0px_16px_0_rgba(51,37,87,0.3)]",
         className
@@ -33,7 +31,7 @@ function ProductCard({ cost = 0, discount, id, image, title, className }: IProdu
         </>
       ) : null}
       <Image
-        className="max-w-[266px] max-h-[235px]"
+        className="max-w-[266px] max-h-[235px] object-cover"
         alt={title}
         width={266}
         height={235}

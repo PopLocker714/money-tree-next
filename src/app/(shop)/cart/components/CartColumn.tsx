@@ -13,7 +13,13 @@ export const CartColumn: ColumnDef<ICartProduct>[] = [
       const previewImage: string = row.getValue("previewImage");
       return (
         <Link href={`/product/${row.original.id}`}>
-          <Image className="w-20 h-20 object-cover" width={30} height={30} src={previewImage} alt="" />
+          <Image
+            className="w-20 h-20 object-cover"
+            width={30}
+            height={30}
+            src={previewImage}
+            alt=""
+          />
         </Link>
       );
     },
@@ -31,15 +37,18 @@ export const CartColumn: ColumnDef<ICartProduct>[] = [
       const formattedPrice = new Intl.NumberFormat("ru-RU", {
         style: "currency",
         currency: "RUB",
+        maximumFractionDigits: 0,
       }).format(price);
       const formatted = new Intl.NumberFormat("ru-RU", {
         style: "currency",
         currency: "RUB",
+        maximumFractionDigits: 0,
       }).format(amount);
 
       return (
         <div className="text-center font-medium">
-          {formatted} <span className="text-gray-400 line-through">{formattedPrice}</span>
+          {formatted}{" "}
+          <span className="text-gray-400 line-through">{formattedPrice}</span>
         </div>
       );
     },
@@ -51,7 +60,10 @@ export const CartColumn: ColumnDef<ICartProduct>[] = [
       // const quantity = parseFloat(row.getValue("quantity"));
       return (
         <div className="flex justify-center">
-          <UpdateQuantity id={row.original.id.toString()} max={row.original.stock} />
+          <UpdateQuantity
+            id={row.original.id.toString()}
+            max={row.original.stock}
+          />
         </div>
       );
     },
@@ -64,6 +76,7 @@ export const CartColumn: ColumnDef<ICartProduct>[] = [
       const formatted = new Intl.NumberFormat("ru-RU", {
         style: "currency",
         currency: "RUB",
+        maximumFractionDigits: 0,
       }).format(amount);
 
       return <div className="text-right font-medium">{formatted}</div>;

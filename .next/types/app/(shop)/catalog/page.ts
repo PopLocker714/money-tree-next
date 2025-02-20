@@ -1,4 +1,4 @@
-// File: /home/jojo/Documents/money-tree-next/src/app/(shop)/catalog/page.tsx
+// File: /Users/jojo/Documents/Projects/money-tree-next/src/app/(shop)/catalog/page.tsx
 import * as entry from '../../../../../src/app/(shop)/catalog/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

@@ -51,7 +51,7 @@ export default function Footer() {
         <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © {new Date().getFullYear()}{" "}
           <Link href="/" className="hover:underline">
-            Денежное дерево™
+            {config.title}™
           </Link>
           . Все права защищены.
         </span>

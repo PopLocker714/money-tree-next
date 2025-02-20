@@ -31,6 +31,7 @@ export default function ProductListCart() {
           {new Intl.NumberFormat("ru-RU", {
             style: "currency",
             currency: "RUB",
+            maximumFractionDigits: 0,
           }).format(total)}
         </span>
       </p>

@@ -23,7 +23,10 @@ const orderSchema = z.object({
   delivery: z.string(),
 });
 
-export const order = async (_: IReturnProductAction, fromData: FormData): Promise<IReturnProductAction> => {
+export const order = async (
+  _: IReturnProductAction,
+  fromData: FormData
+): Promise<IReturnProductAction> => {
   const validatedFields = orderSchema.safeParse({
     firstName: fromData.get("firstName"),
     lastName: fromData.get("lastName"),
@@ -43,7 +46,9 @@ export const order = async (_: IReturnProductAction, fromData: FormData): Promis
     };
   }
 
-  const productsCart: Record<string, ICartItem> = JSON.parse(validatedFields.data.products);
+  const productsCart: Record<string, ICartItem> = JSON.parse(
+    validatedFields.data.products
+  );
 
   const keys = Object.keys(productsCart);
   const keys2 = keys.map((id) => Number(id));
@@ -58,7 +63,9 @@ export const order = async (_: IReturnProductAction, fromData: FormData): Promis
 
   const data = {
     products: products.map((product) => {
-      const priceTotal = (product.price - (product.discount || 0)) * productsCart[product.id].quantity;
+      const priceTotal =
+        (product.price - (product.discount || 0)) *
+        productsCart[product.id].quantity;
       total += priceTotal;
       return {
         id: product.id,
@@ -96,6 +103,7 @@ ${data.products
 Цена: ${new Intl.NumberFormat("ru-RU", {
       style: "currency",
       currency: "RUB",
+      maximumFractionDigits: 0,
     }).format(product.priceTotal)}
 `;
   })
@@ -103,10 +111,12 @@ ${data.products
 Доставка: ${new Intl.NumberFormat("ru-RU", {
     style: "currency",
     currency: "RUB",
+    maximumFractionDigits: 0,
   }).format(deliveryData?.cost || 0)}
 <b>Итого:</b> ${new Intl.NumberFormat("ru-RU", {
     style: "currency",
     currency: "RUB",
+    maximumFractionDigits: 0,
   }).format(total)}
 #${orderId}
   `;
@@ -127,7 +137,12 @@ ${data.products
   );
 
   const htmlUser = await render(
-    <UserOrder deliveryVariant={Number(validatedFields.data.delivery)} orderId={orderId} products={data.products} total={total} />,
+    <UserOrder
+      deliveryVariant={Number(validatedFields.data.delivery)}
+      orderId={orderId}
+      products={data.products}
+      total={total}
+    />,
     {
       pretty: true,
     }

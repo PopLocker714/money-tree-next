@@ -5,7 +5,10 @@ import saveFile from "@/src/lib/files/saveFile";
 import { IReturnProductAction, TImageItem, TImageItemPromise } from "./types";
 import { revalidateTag } from "next/cache";
 
-export default async function createProductActon(_: IReturnProductAction, fromData: FormData): Promise<IReturnProductAction> {
+export default async function createProductActon(
+  _: IReturnProductAction,
+  fromData: FormData
+): Promise<IReturnProductAction> {
   const validatedFields = insertProductSchema.safeParse({
     title: fromData.get("title"),
     description: fromData.get("description"),
@@ -17,6 +20,7 @@ export default async function createProductActon(_: IReturnProductAction, fromDa
     keywordsSearch: fromData.get("keywordsSearch"),
     isFeatured: fromData.get("isFeatured") === "on",
     isActive: fromData.get("isActive") === "on",
+    deliveryInfo: fromData.get("deliveryInfo"),
   });
 
   if (!validatedFields.success) {
@@ -40,27 +44,29 @@ export default async function createProductActon(_: IReturnProductAction, fromDa
   let imagesPromise: TImageItemPromise[] = [];
 
   try {
-    imagesPromise = galleryImages.map(async (file, index): Promise<TImageItem> => {
-      if (!file || !(file instanceof Blob)) {
-        throw new Error("Файл не найден или неправильный формат");
-      }
+    imagesPromise = galleryImages.map(
+      async (file, index): Promise<TImageItem> => {
+        if (!file || !(file instanceof Blob)) {
+          throw new Error("Файл не найден или неправильный формат");
+        }
 
-      if (file.size === 0) {
+        if (file.size === 0) {
+          return null;
+        }
+
+        const res = await saveFile(file, `${index}`);
+
+        if (!res.ok) {
+          throw new Error(res.error || "Не удалось сохранить изображение");
+        }
+
+        if (typeof res.data === "string") {
+          return res.data;
+        }
+
         return null;
       }
-
-      const res = await saveFile(file, `${index}`);
-
-      if (!res.ok) {
-        throw new Error(res.error || "Не удалось сохранить изображение");
-      }
-
-      if (typeof res.data === "string") {
-        return res.data;
-      }
-
-      return null;
-    });
+    );
   } catch (error) {
     if (error instanceof Error) {
       return {
@@ -105,7 +111,9 @@ export default async function createProductActon(_: IReturnProductAction, fromDa
   }
 
   try {
-    await db.insert($Products).values({ ...validatedFields.data, previewImage, images });
+    await db
+      .insert($Products)
+      .values({ ...validatedFields.data, previewImage, images });
     revalidateTag("product-home");
 
     return {

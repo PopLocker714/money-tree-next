@@ -1,11 +1,11 @@
 "use client";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import CategoryItem from "./CategoryItem";
+import CategoryItem, { ICategoryItem } from "./CategoryItem";
 import RightArrow from "../../components/slider/RightArrow";
 import LeftArrow from "../../components/slider/LeftArrow";
 
-function CategoriesList({ categories }: { categories: { title: string; image: string }[] }) {
+function CategoriesList({ categories }: { categories: ICategoryItem[] }) {
   return (
     <section className="container my-9  mb-12">
       <div className="relative">

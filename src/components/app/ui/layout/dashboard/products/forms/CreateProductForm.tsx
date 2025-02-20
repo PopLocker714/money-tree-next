@@ -34,6 +34,7 @@ export default function CreateProductForm() {
             <Input type="number" name="stock" id="stock" placeholder="Наличие" required />
             <Input type="text" name="categoryId" id="categoryId" placeholder="Категория [id]" />
             <Input type="text" name="keywordSearch" id="keywordSearch" placeholder="Ключевые слова" />
+            <Input type="text" name="deliveryInfo" id="deliveryInfo" placeholder="Информация о доставке" />
           </div>
         </div>
 

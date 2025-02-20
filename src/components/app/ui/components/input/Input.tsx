@@ -28,7 +28,7 @@ export default function Input({
         <div className="flex justify-between w-full">
           <p className="ml-2 text-lg">{label}</p>
           <p className="mr-2 text-sm font-medium">
-            {costDelivery.get(Number(props.value) || 1)?.cost.toLocaleString("ru-RU", { style: "currency", currency: "RUB" })}
+            {costDelivery.get(Number(props.value) || 1)?.cost.toLocaleString("ru-RU", { style: "currency", currency: "RUB", maximumFractionDigits: 0 })}
           </p>
         </div>
       </label>

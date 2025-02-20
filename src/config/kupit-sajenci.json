@@ -10,7 +10,7 @@
       "slides": [
         {
           "title": "Cвой яблоневый сад",
-          "subTitle": "Создайте",
+          "subTitle": "Посадите",
           "btn": "Узнать подробнее",
           "bgColor": "swiper-slide__ks__bg-1"
         },
@@ -25,21 +25,31 @@
           "title": "Большой ассортимент декоративных кустарников",
           "btn": "Узнать подробнее",
           "bgColor": "swiper-slide__ks__bg-3"
-        },
-        {
-          "title": "Cвой яблоневый сад",
-          "subTitle": "Создайте",
-          "btn": "Узнать подробнее",
-          "bgColor": "swiper-slide__ks__bg-4"
         }
       ]
     },
     "categories": {
       "data": [
-        { "title": "Плодовые деревья", "image": "/kupit-sajenci/categories/01.png" },
-        { "title": "Хвойные деревьяи кустарники", "image": "/kupit-sajenci/categories/02.png" },
-        { "title": "Плодовые кустарники", "image": "/kupit-sajenci/categories/03.png" },
-        { "title": "Декоративные кустарники", "image": "/kupit-sajenci/categories/04.png" }
+        {
+          "title": "Плодовые деревья",
+          "image": "/kupit-sajenci/categories/01.png",
+          "url": "/catalog?category=%5B2%5D"
+        },
+        {
+          "title": "Хвойные деревья и кустарники",
+          "image": "/kupit-sajenci/categories/02.png",
+          "url": "/catalog?category=%5B3%5D"
+        },
+        {
+          "title": "Плодовые кустарники",
+          "image": "/kupit-sajenci/categories/03.png",
+          "url": "/catalog?category=%5B4%5D"
+        },
+        {
+          "title": "Декоративные кустарники",
+          "image": "/kupit-sajenci/categories/04.png",
+          "url": "/catalog?category=%5B5%5D"
+        }
       ]
     }
   }

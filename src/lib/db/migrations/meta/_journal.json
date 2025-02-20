@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1731308138028,
-      "tag": "0000_lean_randall_flagg",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1731314706831,
-      "tag": "0001_spotty_the_liberteens",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1731315292242,
-      "tag": "0002_organic_vector",
+      "when": 1740068085362,
+      "tag": "0000_first_chat",
       "breakpoints": true
     }
   ]

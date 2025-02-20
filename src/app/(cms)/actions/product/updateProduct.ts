@@ -1,13 +1,20 @@
 "use server";
 import db from "@/src/lib/db/db";
-import { $Products, insertProductSchema, TProductSelect } from "@/src/lib/db/schema";
+import {
+  $Products,
+  insertProductSchema,
+  TProductSelect,
+} from "@/src/lib/db/schema";
 import deleteFile from "@/src/lib/files/deleteFile";
 import saveFile from "@/src/lib/files/saveFile";
 import { eq } from "drizzle-orm";
 import { IReturnProductAction, TImageItem, TImageItemPromise } from "./types";
 import { revalidateTag } from "next/cache";
 
-export default async function updateProductActon(_: IReturnProductAction, fromData: FormData): Promise<IReturnProductAction> {
+export default async function updateProductActon(
+  _: IReturnProductAction,
+  fromData: FormData
+): Promise<IReturnProductAction> {
   const validatedFields = insertProductSchema.safeParse({
     id: Number(fromData.get("id")),
     title: fromData.get("title"),
@@ -20,6 +27,7 @@ export default async function updateProductActon(_: IReturnProductAction, fromDa
     keywordsSearch: fromData.get("keywordsSearch"),
     isFeatured: fromData.get("isFeatured") === "on",
     isActive: fromData.get("isActive") === "on",
+    deliveryInfo: fromData.get("deliveryInfo"),
   });
 
   if (!validatedFields.success) {
@@ -54,37 +62,41 @@ export default async function updateProductActon(_: IReturnProductAction, fromDa
       where: eq($Products.id, validatedFields.data.id),
     });
 
-    const savedImages: TImageItem[] = product?.images ? JSON.parse(product.images) : [null, null, null, null, null];
+    const savedImages: TImageItem[] = product?.images
+      ? JSON.parse(product.images)
+      : [null, null, null, null, null];
 
     if (!product) {
       throw new Error("Product not found");
     }
 
-    imagesPromise = galleryImages.map(async (file, index): Promise<TImageItem> => {
-      if (!file || !(file instanceof Blob)) {
-        throw new Error("Файл не найден или неправильный формат");
+    imagesPromise = galleryImages.map(
+      async (file, index): Promise<TImageItem> => {
+        if (!file || !(file instanceof Blob)) {
+          throw new Error("Файл не найден или неправильный формат");
+        }
+
+        if (file.size === 0) {
+          return savedImages[index];
+        }
+
+        const res = await saveFile(file, `${index}`);
+
+        if (savedImages[index]) {
+          await deleteFile(savedImages[index]);
+        }
+
+        if (!res.ok) {
+          throw new Error(res.error || "Не удалось сохранить изображение");
+        }
+
+        if (typeof res.data === "string") {
+          return res.data;
+        }
+
+        return null;
       }
-
-      if (file.size === 0) {
-        return savedImages[index];
-      }
-
-      const res = await saveFile(file, `${index}`);
-
-      if (savedImages[index]) {
-        await deleteFile(savedImages[index]);
-      }
-
-      if (!res.ok) {
-        throw new Error(res.error || "Не удалось сохранить изображение");
-      }
-
-      if (typeof res.data === "string") {
-        return res.data;
-      }
-
-      return null;
-    });
+    );
   } catch (error) {
     console.log(error);
 
@@ -145,7 +157,11 @@ export default async function updateProductActon(_: IReturnProductAction, fromDa
       images,
     };
 
-    const result = await db.update($Products).set(updatedProduct).where(eq($Products.id, validatedFields.data.id)).returning();
+    const result = await db
+      .update($Products)
+      .set(updatedProduct)
+      .where(eq($Products.id, validatedFields.data.id))
+      .returning();
 
     revalidateTag("product-home");
     return {

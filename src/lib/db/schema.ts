@@ -43,8 +43,9 @@ export const $Products = sqliteTable("products", {
   keywordsSearch: text("keywordsSearch"),
   isFeatured: integer("isFeatured", { mode: "boolean" }).default(false),
   isActive: integer("isActive", { mode: "boolean" }).default(true),
-  createdAt: text("createdAt").default(new Date().toISOString()).notNull(),
-  updatedAt: text("updatedAt").default(new Date().toISOString()).notNull(),
+  deliveryInfo: text("deliveryInfo").default(""),
+  createdAt: text("createdAt").$defaultFn(() => new Date().toISOString()).notNull(),
+  updatedAt: text("updatedAt").$defaultFn(() => new Date().toISOString()).notNull(),
 });
 
 export const insertProductSchema = createInsertSchema($Products);

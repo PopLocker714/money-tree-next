@@ -29,13 +29,41 @@
     },
     "categories": {
       "data": [
-        { "title": "Розы", "image": "/money-tree/categories/rouse.png" },
-        { "title": "Готовые букеты", "image": "/money-tree/categories/buket.png" },
-        { "title": "Горшки", "image": "/money-tree/categories/pot.png" },
-        { "title": "Суккулент", "image": "/money-tree/categories/sykylent.png" },
-        { "title": "Готовые наборы", "image": "/money-tree/categories/nabor.png" },
-        { "title": "Еще категория", "image": "/money-tree/categories/rouse.png" },
-        { "title": "Еще категория", "image": "/money-tree/categories/rouse.png" }
+        {
+          "title": "Розы",
+          "image": "/money-tree/categories/rouse.png",
+          "url": "/catalog"
+        },
+        {
+          "title": "Готовые букеты",
+          "image": "/money-tree/categories/buket.png",
+          "url": "/catalog"
+        },
+        {
+          "title": "Горшки",
+          "image": "/money-tree/categories/pot.png",
+          "url": "/catalog"
+        },
+        {
+          "title": "Суккулент",
+          "image": "/money-tree/categories/sykylent.png",
+          "url": "/catalog"
+        },
+        {
+          "title": "Готовые наборы",
+          "image": "/money-tree/categories/nabor.png",
+          "url": "/catalog"
+        },
+        {
+          "title": "Еще категория",
+          "image": "/money-tree/categories/rouse.png",
+          "url": "/catalog"
+        },
+        {
+          "title": "Еще категория",
+          "image": "/money-tree/categories/rouse.png",
+          "url": "/catalog"
+        }
       ]
     }
   }

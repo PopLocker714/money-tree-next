@@ -1,4 +1,4 @@
-// File: /home/jojo/Documents/money-tree-next/src/app/api/cart/route.ts
+// File: /Users/jojo/Documents/Projects/money-tree-next/src/app/api/cart/route.ts
 import * as entry from '../../../../../src/app/api/cart/route.js'
 import type { NextRequest } from 'next/server.js'
 

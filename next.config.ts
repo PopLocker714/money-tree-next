@@ -4,6 +4,19 @@ import type { NextConfig } from "next";
 // seed()
 
 const nextConfig: NextConfig = {
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/(.*)",
+  //       headers: [
+  //         {
+  //           key: "Content-Security-Policy",
+  //           value: "script-src 'self' mc.yandex.ru yastatic.net;",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
   reactStrictMode: false,
   experimental: {
     serverActions: {

@@ -26,6 +26,7 @@ export const ProductColumn: ColumnDef<TProductColumn>[] = [
       const formatted = new Intl.NumberFormat("ru-RU", {
         style: "currency",
         currency: "RUB",
+        maximumFractionDigits: 0,
       }).format(amount);
 
       return <div className="text-right font-medium">{formatted}</div>;
@@ -39,6 +40,7 @@ export const ProductColumn: ColumnDef<TProductColumn>[] = [
       const formatted = new Intl.NumberFormat("ru-RU", {
         style: "currency",
         currency: "RUB",
+        maximumFractionDigits: 0,
       }).format(amount);
 
       return <div className="text-right font-medium">{formatted}</div>;

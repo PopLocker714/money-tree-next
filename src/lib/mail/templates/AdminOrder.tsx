@@ -23,6 +23,7 @@ export default function AdminOrder({ products, total, user, orderId, deliveryVar
   const totalFormatted = total.toLocaleString("ru-RU", {
     style: "currency",
     currency: "RUB",
+    maximumFractionDigits: 0,
   });
 
   const host = process.env.HOST || "localhost";
@@ -85,7 +86,7 @@ export default function AdminOrder({ products, total, user, orderId, deliveryVar
                       <Text>{product.quantity}</Text>
                     </td>
                     <td align="center" className="border-0 border-b border-solid border-gray-200 py-[8px]">
-                      <Text>{product.priceTotal.toLocaleString("ru-RU", { style: "currency", currency: "RUB" })}</Text>
+                      <Text>{product.priceTotal.toLocaleString("ru-RU", { style: "currency", currency: "RUB", maximumFractionDigits: 0  })}</Text>
                     </td>
                   </tr>
                 );
@@ -94,7 +95,7 @@ export default function AdminOrder({ products, total, user, orderId, deliveryVar
             <Row>
               <Column align="center">
                 <Text className="mb-[16px] text-gray-500">
-                  Доставка: {delivery?.cost?.toLocaleString("ru-RU", { style: "currency", currency: "RUB" })}
+                  Доставка: {delivery?.cost?.toLocaleString("ru-RU", { style: "currency", currency: "RUB", maximumFractionDigits: 0  })}
                 </Text>
                 <Text className="mb-[16px] text-gray-500">Итого: {totalFormatted}</Text>
                 <Button
