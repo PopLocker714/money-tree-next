@@ -5,7 +5,9 @@ import supabase from "../supabase/supabase";
 
 export default async function saveFile(file: Blob, prefix = "") {
   // const path = previewImage.replace(`https://${process.env.PROJECT_SUPABASE_URL}.supabase.co/storage/v1/object/public/`, "");
-  const { data, error } = await supabase.storage.from("products").upload(`${!!prefix ? prefix + "_" : ""}${randomUUID()}`, file);
+  const { data, error } = await supabase.storage
+    .from("products")
+    .upload(`${!!prefix ? prefix + "_" : ""}${randomUUID()}`, file);
 
   if (error) {
     console.log("SAVE FILE ERROR", error);
@@ -24,15 +26,17 @@ export default async function saveFile(file: Blob, prefix = "") {
   };
 }
 
-export async function saveFileOld(file: Blob, prefix = "") {
+export async function saveFileLocal(file: Blob, prefix = "") {
   const arrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
 
   const extension = file.type.split("/")[1] || "dat"; // По умолчанию `dat`, если расширение неизвестно
 
-  const fileNameWithExtension = `${!!prefix ? prefix + "_" : ""}${randomUUID()}.${extension}`;
+  const fileNameWithExtension = `${
+    !!prefix ? prefix + "_" : ""
+  }${randomUUID()}.${extension}`;
 
-  const dirPath = path.join(process.cwd(), "public", "uploads");
+  const dirPath = path.join(process.cwd(), "static", "uploads");
   const filePath = path.join(dirPath, fileNameWithExtension);
 
   // Создаем директорию, если она не существует
@@ -49,7 +53,7 @@ export async function saveFileOld(file: Blob, prefix = "") {
 
   const res = await writeFile(filePath, buffer)
     .then(() => {
-      const publicUrl = `/uploads/${fileNameWithExtension}`;
+      const publicUrl = `/api/file?pathname=/static/uploads/${fileNameWithExtension}`;
       return {
         ok: true,
         error: null,

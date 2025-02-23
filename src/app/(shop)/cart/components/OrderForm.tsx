@@ -52,10 +52,9 @@ export default function OrderForm() {
           </div>
           <div className="flex flex-col flex-1 pl-4">
             <h2 className="h2 mb-4">Доставка</h2>
-            <Input onChange={onChange} value={1} id="delivery-1" name="delivery" label="Самовывоз" type="radio" defaultChecked />
-            <Input onChange={onChange} value={2} id="delivery-2" name="delivery" label="Доставка СДЭК" type="radio" />
-            <Input onChange={onChange} value={3} id="delivery-3" name="delivery" label="Доставка Курьером" type="radio" />
-            <Input onChange={onChange} value={4} id="delivery-4" name="delivery" label="Доставка почтой России" type="radio" />
+            {Array.from(costDelivery).map(([key, item]) => (
+              <Input defaultChecked={key === 1} key={key} onChange={onChange} value={key} id={`delivery-${key}`} name="delivery" label={item.title} type="radio" />
+            ))}
           </div>
         </div>
 

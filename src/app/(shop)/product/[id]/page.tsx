@@ -139,10 +139,13 @@ export default async function Product({ params }: TPropsPage) {
               </p>
             )}
           </div>
+
           <AddCart id={id} max={stock} />
 
-          <div className="mt-4">
-            <p className="font-medium">{deliveryInfo}</p>
+          <div className="mt-8">
+            <p className="text-orange-600">
+              Срок доставки: <span className="">{deliveryInfo}</span>
+            </p>
           </div>
         </div>
       </div>

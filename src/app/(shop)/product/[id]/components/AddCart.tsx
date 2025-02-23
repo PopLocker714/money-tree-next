@@ -60,7 +60,7 @@ export default function AddCart({ id, max }: { max: number; id: string }) {
       ) : (
         <>
           <button
-            className="bg-orange-400 rounded-2xl py-4 px-6 text-base border-none mt-8 text-white-100 hover:bg-orange-500 disabled:bg-gray-400"
+            className="bg-orange-400 font-semibold rounded-2xl py-4 px-6 text-base border-none mt-8 text-white-100 hover:bg-orange-500 disabled:bg-gray-400"
             onClick={() => {
               setCount(1);
               handleUpdateCart(1);

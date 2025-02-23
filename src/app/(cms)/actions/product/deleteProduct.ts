@@ -6,7 +6,10 @@ import { eq } from "drizzle-orm";
 import { IReturnProductAction, TImageItem } from "./types";
 import { revalidateTag } from "next/cache";
 
-export async function deleteProductActon(_: unknown, fromData: FormData): Promise<IReturnProductAction> {
+export async function deleteProductActon(
+  _: unknown,
+  fromData: FormData
+): Promise<IReturnProductAction> {
   const productId = fromData.get("id");
 
   if (!productId) {
@@ -33,7 +36,9 @@ export async function deleteProductActon(_: unknown, fromData: FormData): Promis
       }
     }
 
-    const res = await db.delete($Products).where(eq($Products.id, Number(productId)));
+    const res = await db
+      .delete($Products)
+      .where(eq($Products.id, Number(productId)));
 
     revalidateTag("product-home");
 

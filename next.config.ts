@@ -4,16 +4,12 @@ import type { NextConfig } from "next";
 // seed()
 
 const nextConfig: NextConfig = {
-  // async headers() {
+  // async rewrites() {
   //   return [
   //     {
-  //       source: "/(.*)",
-  //       headers: [
-  //         {
-  //           key: "Content-Security-Policy",
-  //           value: "script-src 'self' mc.yandex.ru yastatic.net;",
-  //         },
-  //       ],
+  //       source: '/static/:path*',
+  //       // destination: '/static/:path*',
+  //       destination: "http://localhost:4000/static/uploads/:path*", // Использует локальный сервер
   //     },
   //   ];
   // },

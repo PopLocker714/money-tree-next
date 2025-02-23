@@ -6,7 +6,7 @@ import {
   TProductSelect,
 } from "@/src/lib/db/schema";
 import deleteFile from "@/src/lib/files/deleteFile";
-import saveFile from "@/src/lib/files/saveFile";
+import { saveFileLocal } from "@/src/lib/files/saveFile";
 import { eq } from "drizzle-orm";
 import { IReturnProductAction, TImageItem, TImageItemPromise } from "./types";
 import { revalidateTag } from "next/cache";
@@ -80,7 +80,7 @@ export default async function updateProductActon(
           return savedImages[index];
         }
 
-        const res = await saveFile(file, `${index}`);
+        const res = await saveFileLocal(file, `${index}`);
 
         if (savedImages[index]) {
           await deleteFile(savedImages[index]);
@@ -127,7 +127,7 @@ export default async function updateProductActon(
   let newFilePath: TImageItem = null;
 
   if (file && file.size > 0) {
-    const res = await saveFile(file, "preview");
+    const res = await saveFileLocal(file, "preview");
     if (typeof res.data === "string") {
       newFilePath = res.data;
       if (product?.previewImage) {

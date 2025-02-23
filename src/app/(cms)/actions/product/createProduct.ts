@@ -1,7 +1,7 @@
 "use server";
 import db from "@/src/lib/db/db";
 import { $Products, insertProductSchema } from "@/src/lib/db/schema";
-import saveFile from "@/src/lib/files/saveFile";
+import { saveFileLocal } from "@/src/lib/files/saveFile";
 import { IReturnProductAction, TImageItem, TImageItemPromise } from "./types";
 import { revalidateTag } from "next/cache";
 
@@ -54,7 +54,7 @@ export default async function createProductActon(
           return null;
         }
 
-        const res = await saveFile(file, `${index}`);
+        const res = await saveFileLocal(file, `${index}`);
 
         if (!res.ok) {
           throw new Error(res.error || "Не удалось сохранить изображение");
@@ -95,7 +95,7 @@ export default async function createProductActon(
   }
 
   if (imagePreviewFile && imagePreviewFile.size > 0) {
-    const res = await saveFile(imagePreviewFile, "preview");
+    const res = await saveFileLocal(imagePreviewFile, "preview");
 
     if (res.error) {
       return {

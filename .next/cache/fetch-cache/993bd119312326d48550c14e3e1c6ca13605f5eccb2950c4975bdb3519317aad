@@ -1,1 +1,1 @@
-{"kind":"FETCH","data":{"headers":{},"body":"[{\"id\":\"1\",\"title\":\"test\",\"image\":\"https://ulqumkttxuiznqmcntaj.supabase.co/storage/v1/object/public/products/preview_3bbfbfb4-75d8-4f61-b7f4-1d117aad4492\",\"cost\":10000,\"discount\":0}]","status":200,"url":""},"revalidate":3600,"tags":["product-home"]}
+{"kind":"FETCH","data":{"headers":{},"body":"[]","status":200,"url":""},"revalidate":3600,"tags":["product-home"]}
