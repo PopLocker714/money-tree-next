@@ -84,7 +84,7 @@ export default async function Payment() {
       </p>
 
       <h3 className="text-xl mb-2">Юридический адрес</h3>
-      <p className="mb-4">142200 Московская область, ул.Ворошилова, 128</p>
+      <p className="mb-4">142200 Московская область, г.Серпухов, ул.Ворошилова, 128</p>
     </section>
   );
 }
