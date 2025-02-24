@@ -11,7 +11,11 @@ export default async function CategoriesBoard() {
   const tabs: ICategoryTab[] = [
     { id: "0", label: "Добавить", content: <AddCategory /> },
     { id: "1", label: "Удалить", content: <DeleteCategory /> },
-    { id: "2", label: "Изменить", content: <UpdateCategory /> },
+    {
+      id: "2",
+      label: "Изменить",
+      content: <UpdateCategory categories={categories} />,
+    },
   ];
 
   return (

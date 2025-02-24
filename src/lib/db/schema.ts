@@ -12,6 +12,7 @@ export const $Users = sqliteTable("users", {
 export const $Categories = sqliteTable("categories", {
   id: int().primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
+  content: text("content"),
   parentId: integer("parent_id").references((): AnySQLiteColumn => $Categories.id, { onDelete: "cascade" }),
 });
 

@@ -32,23 +32,19 @@
       "data": [
         {
           "title": "Плодовые деревья",
-          "image": "/kupit-sajenci/categories/01.png",
-          "url": "/catalog?category=%5B2%5D"
+          "image": "/kupit-sajenci/categories/01.png"
         },
         {
           "title": "Хвойные деревья и кустарники",
-          "image": "/kupit-sajenci/categories/02.png",
-          "url": "/catalog?category=%5B3%5D"
+          "image": "/kupit-sajenci/categories/02.png"
         },
         {
           "title": "Плодовые кустарники",
-          "image": "/kupit-sajenci/categories/03.png",
-          "url": "/catalog?category=%5B4%5D"
+          "image": "/kupit-sajenci/categories/03.png"
         },
         {
           "title": "Декоративные кустарники",
-          "image": "/kupit-sajenci/categories/04.png",
-          "url": "/catalog?category=%5B5%5D"
+          "image": "/kupit-sajenci/categories/04.png"
         }
       ]
     }

@@ -8,8 +8,11 @@ const getCachedProducts = unstable_cache(
   async (): Promise<IProductCard[]> => {
     return await db.query.$Products
       .findMany({
-        where: and(eq($Products.isFeatured, true), eq($Products.isActive, true)),
-        limit: 4,
+        where: and(
+          eq($Products.isFeatured, true),
+          eq($Products.isActive, true)
+        ),
+        // limit: 4,
       })
       .then((res) =>
         res.map((item) => ({
@@ -22,7 +25,7 @@ const getCachedProducts = unstable_cache(
       );
   },
   ["product-home"],
-  { revalidate: 3600, tags: ["product-home"] }
+  { revalidate: 3 * 60 * 60, tags: ["product-home"] }
 );
 
 const ProductSell = async () => {

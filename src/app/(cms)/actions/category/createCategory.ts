@@ -1,4 +1,4 @@
-'use server';
+"use server";
 import db from "@/src/lib/db/db";
 import { $Categories, insertCategorySchema } from "@/src/lib/db/schema";
 
@@ -6,8 +6,8 @@ export default async function createCategory(_: unknown, fromData: FormData) {
   const validatedFields = insertCategorySchema.safeParse({
     name: fromData.get("name"),
     parentId: Number(fromData.get("parentId")) || undefined,
+    content: fromData.get("content"),
   });
-
 
   if (!validatedFields.success) {
     return {
@@ -17,8 +17,7 @@ export default async function createCategory(_: unknown, fromData: FormData) {
 
   try {
     const result = await db.insert($Categories).values({
-      name: validatedFields.data.name,
-      parentId: validatedFields.data.parentId,
+      ...validatedFields.data,
     });
 
     return {

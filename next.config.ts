@@ -4,15 +4,6 @@ import type { NextConfig } from "next";
 // seed()
 
 const nextConfig: NextConfig = {
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/static/:path*',
-  //       // destination: '/static/:path*',
-  //       destination: "http://localhost:4000/static/uploads/:path*", // Использует локальный сервер
-  //     },
-  //   ];
-  // },
   reactStrictMode: false,
   experimental: {
     serverActions: {

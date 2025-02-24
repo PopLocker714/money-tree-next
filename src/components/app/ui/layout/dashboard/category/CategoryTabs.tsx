@@ -1,4 +1,5 @@
 "use client";
+import { TCategoryNode } from "@/src/app/(shop)/actions/getCategoryTree";
 import { JSX, useState } from "react";
 
 export interface ICategoryTab {
@@ -18,7 +19,9 @@ export default function CategoryTabs({ tabs }: { tabs: ICategoryTab[] }) {
             key={tab.id}
             onClick={() => setActiveTab(+tab.id)}
             className={`flex-1 py-2 text-center font-medium ${
-              activeTab === +tab.id ? "text-blue-500 border-b-2 border-blue-500" : "text-gray-500"
+              activeTab === +tab.id
+                ? "text-blue-500 border-b-2 border-blue-500"
+                : "text-gray-500"
             }`}
           >
             {tab.label}
@@ -26,7 +29,9 @@ export default function CategoryTabs({ tabs }: { tabs: ICategoryTab[] }) {
         ))}
       </div>
 
-      <div className="p-4 bg-white border border-gray-300 rounded-b-lg shadow-sm">{tabs[activeTab]?.content}</div>
+      <div className="p-4 bg-white border border-gray-300 rounded-b-lg shadow-sm">
+        {tabs[activeTab]?.content}
+      </div>
     </div>
   );
 }

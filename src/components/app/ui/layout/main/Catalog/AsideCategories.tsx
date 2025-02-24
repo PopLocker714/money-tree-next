@@ -3,10 +3,10 @@ import AsideCategoryItem from "./AsideCategoryItem";
 
 export default function AsideCategories({ items }: { items: TCategoryNode[] }) {
   return (
-    <ul className="flex flex-wrap">
+    <div className="flex flex-wrap">
       {items.map((item) => (
-        <AsideCategoryItem key={item.id} category={item} isRoot={true} />
+        <AsideCategoryItem isRoot={true} key={item.id} category={item} />
       ))}
-    </ul>
+    </div>
   );
 }

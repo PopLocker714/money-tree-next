@@ -8,13 +8,16 @@ const categoryUpdateSchema = z.object({
   id: z.number(),
   name: z.string().optional(),
   parentId: z.number().optional(),
+  content: z.string().optional(),
 });
 
 export async function updateCategory(_: unknown, fromData: FormData) {
+
   const validatedFields = categoryUpdateSchema.safeParse({
     id: Number(fromData.get("id")),
     name: fromData.get("name"),
     parentId: Number(fromData.get("parentId")) || undefined,
+    content: fromData.get("content"),
   });
 
   if (!validatedFields.success) {
@@ -24,7 +27,10 @@ export async function updateCategory(_: unknown, fromData: FormData) {
   }
 
   try {
-    const result = await db.update($Categories).set(validatedFields.data).where(eq($Categories.id, validatedFields.data.id));
+    const result = await db
+      .update($Categories)
+      .set(validatedFields.data)
+      .where(eq($Categories.id, validatedFields.data.id));
     return {
       error: null,
       data: result,

@@ -11,7 +11,7 @@
 !.yarn/versions
 
 /static/uploads
-
+data.json
 # testing
 /coverage
 

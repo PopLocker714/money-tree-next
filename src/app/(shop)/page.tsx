@@ -3,12 +3,37 @@ import CategoriesList from "@/src/components/app/ui/sections/CategoriesList/Cate
 import Hero from "../../components/app/ui/sections/Hero/Hero";
 import ProductSell from "../../components/app/ui/sections/ProductSell/ProductSell";
 import { conf } from "@/src/config/conf";
+import { getCategoryTree } from "./actions/getCategoryTree";
+import { getTreeCategoriesId } from "@/src/components/app/ui/layout/main/Catalog/getTreeCategoriesId";
 
-export default function Home() {
+export default async function Home() {
+  // hardcode!!!
+  const categories = await getCategoryTree();
+  const data = conf().content.categories.data;
+  const items = categories.map((category) => {
+    if (
+      category.id === 2 ||
+      category.id === 3 ||
+      category.id === 4 ||
+      category.id === 5
+    ) {
+      const itemData = data.find((itm, index) => index + 2 === category.id);
+      const url =
+        "/catalog?" +
+        new URLSearchParams({
+          category: JSON.stringify(getTreeCategoriesId(category)),
+        });
+
+      return { ...itemData, url };
+    }
+  }).filter((item) => item !== undefined);;
+
+  // hardcode!!!
+
   return (
     <main>
       <Hero />
-      <CategoriesList categories={conf().content.categories.data} />
+      {<CategoriesList categories={items} />}
       <ProductSell />
       <section className="container mt-4">
         <p className="mb-6">

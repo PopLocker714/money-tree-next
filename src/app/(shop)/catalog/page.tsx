@@ -6,6 +6,7 @@ import ProductCard, {
 import { $Products, TProductInsert } from "@/src/lib/db/schema";
 import { and, eq, inArray } from "drizzle-orm";
 import Aside from "@/src/components/app/ui/layout/main/Catalog/Aside";
+import { getCategoryById } from "@/src/lib/categories/getCategoryById";
 
 export const metadata: Metadata = {
   title: "Каталог",
@@ -53,6 +54,8 @@ export default async function Catalog({
     };
   });
 
+  const categoryContent = await getCategoryById(category[0]);
+
   return (
     <section className="container">
       <div className="flex flex-col">
@@ -64,6 +67,14 @@ export default async function Catalog({
             })}
           </div>
         </div>
+        {categoryContent?.content && (
+          <>
+            <h2 className="text-3xl font-medium mt-8 mb-2">
+              {categoryContent.name}
+            </h2>
+            <p className="text-lg ">{categoryContent.content}</p>
+          </>
+        )}
       </div>
     </section>
   );
