@@ -73,7 +73,7 @@ export default async function Payment() {
       <h3 className="text-xl mb-2">Банковские счета</h3>
       <p className="mb-1">
         <strong>Расчётный счёт:</strong> 40802810601500451949 Банк получателя
-        ООО "Банк Точка"
+        ООО &laquo;Банк Точка&raquo;
       </p>
       <p className="mb-1">
         <strong>БИК:</strong> 044525104
