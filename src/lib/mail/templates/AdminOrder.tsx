@@ -16,7 +16,7 @@ interface IAdminOrderProps {
     address: string;
     comment?: string;
   };
-  orderId: number;
+  orderId: string;
 }
 
 export default function AdminOrder({ products, total, user, orderId, deliveryVariant }: IAdminOrderProps) {

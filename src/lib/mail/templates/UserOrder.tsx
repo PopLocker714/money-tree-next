@@ -24,7 +24,7 @@ interface IUserOrderProps {
     title: string;
   }[];
   total: number;
-  orderId: number;
+  orderId: string;
   deliveryVariant: number;
 }
 

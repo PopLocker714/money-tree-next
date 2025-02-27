@@ -11,6 +11,8 @@ import { render } from "@react-email/components";
 import AdminOrder from "@/src/lib/mail/templates/AdminOrder";
 import UserOrder from "@/src/lib/mail/templates/UserOrder";
 import { costDelivery } from "@/src/lib/data";
+import { tkassa } from "@/src/lib/cassa/tkassa";
+import { generateRandomString } from "@/src/lib/utils";
 
 const orderSchema = z.object({
   firstName: z.string(),
@@ -80,7 +82,7 @@ export const order = async (
 
   total += deliveryData?.cost || 0;
 
-  const orderId = Math.floor(Math.random() * 1000000);
+  const orderId = generateRandomString(16);
 
   const textTg = `
 <b>Новый заказ</b> &#128276;
@@ -121,8 +123,6 @@ ${data.products
 #${orderId}
   `;
 
-  sendTgMessage(textTg);
-
   const htmlAdmin = await render(
     <AdminOrder
       deliveryVariant={Number(validatedFields.data.delivery)}
@@ -148,25 +148,37 @@ ${data.products
     }
   );
 
-  // const dirPath = join(process.cwd(), "public", "mail");
-  // const filePath = join(dirPath, `mail.html`);
-  // writeFileSync(filePath, htmlUser);
-
-  sendMail({
-    to: validatedFields.data.email,
-    subject: `Ваш заказ на сайте Денежное дерево #${orderId}`,
-    text: htmlUser,
+  const result = await tkassa.init({
+    Amount: total * 100,
+    OrderId: orderId.toString(),
+    // Shops: data.products.map((product) => ({
+    //   Name: product.title,
+    //   Amount: product.priceTotal,
+    //   ShopCode
+    // }))
   });
 
-  sendMail({
-    to: process.env.SMTP_TO || "",
-    subject: `Новый заказ Денежное дерево #${orderId}`,
-    text: htmlAdmin,
-  });
+  console.log("PAYMENT RESULT:", JSON.stringify(result, null, 2));
+
+  if (result.Success) {
+    sendTgMessage(textTg);
+
+    sendMail({
+      to: validatedFields.data.email,
+      subject: `Ваш заказ на сайте Денежное дерево #${orderId}`,
+      text: htmlUser,
+    });
+
+    sendMail({
+      to: process.env.SMTP_TO || "",
+      subject: `Новый заказ Денежное дерево #${orderId}`,
+      text: htmlAdmin,
+    });
+  }
 
   return {
     error: null,
-    data: { orderId },
+    data: result,
     ok: true,
   };
 };
