@@ -36,7 +36,6 @@ export async function POST(request: NextRequest) {
   );
 
   if (data.Success && data.Status === "CONFIRMED") {
-
     sendTgMessage(`
 <b>Оплаченный заказ на сайте ${config.title}</b>
 <b>Сумма:</b> <code>${data.Amount / 100}</code> руб.

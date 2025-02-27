@@ -25,7 +25,7 @@ export default function Footer() {
             {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> */}
           </Link>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-            <li>
+            {/* <li>
               <Link href="/" className="hover:underline me-4 md:me-6">
                 О нас
               </Link>
@@ -34,15 +34,20 @@ export default function Footer() {
               <Link href="/" className="hover:underline me-4 md:me-6">
                 Политика конфиденциальности
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/order" className="hover:underline me-4 md:me-6">
                 Доставка
               </Link>
             </li>
             <li>
-              <Link href="/payment" className="hover:underline">
+              <Link href="/payment" className="hover:underline me-4 md:me-6">
                 Оплата
+              </Link>
+            </li>
+            <li>
+              <Link href="/contacts" className="hover:underline">
+                Контакты
               </Link>
             </li>
           </ul>
