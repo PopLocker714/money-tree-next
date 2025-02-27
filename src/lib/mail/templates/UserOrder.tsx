@@ -26,6 +26,7 @@ interface IUserOrderProps {
   total: number;
   orderId: string;
   deliveryVariant: number;
+  paymentUrl: string | undefined;
 }
 
 export default function UserOrder({
@@ -33,6 +34,7 @@ export default function UserOrder({
   total,
   orderId,
   deliveryVariant,
+  paymentUrl,
 }: IUserOrderProps) {
   const totalFormatted = total.toLocaleString("ru-RU", {
     style: "currency",
@@ -150,9 +152,11 @@ export default function UserOrder({
                     maximumFractionDigits: 0,
                   })}
                 </Text>
+
                 <Text className="mb-[16px] text-gray-500">
                   Итого: <span className="font-semibold">{totalFormatted}</span>
                 </Text>
+
                 <Text className="mb-[16px] text-gray-500">
                   Про условия оплаты читайте{" "}
                   <Link
@@ -166,6 +170,7 @@ export default function UserOrder({
                     здесь
                   </Link>
                 </Text>
+
                 <Text className="mb-[16px] text-gray-500">
                   Про условия доставки читайте{" "}
                   <Link
@@ -179,6 +184,17 @@ export default function UserOrder({
                     здесь
                   </Link>
                 </Text>
+
+                <Button
+                  className="box-border w-full rounded-[8px] bg-orange-400 px-[12px] py-[12px] text-center font-semibold text-white"
+                  href={
+                    paymentUrl || host === "localhost"
+                      ? `http://${host}:${port}`
+                      : `https://${host}`
+                  }
+                >
+                  Оплатить
+                </Button>
                 <Button
                   className="box-border w-full rounded-[8px] bg-indigo-600 px-[12px] py-[12px] text-center font-semibold text-white"
                   href={

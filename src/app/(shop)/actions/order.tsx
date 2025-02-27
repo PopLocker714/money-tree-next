@@ -13,6 +13,7 @@ import UserOrder from "@/src/lib/mail/templates/UserOrder";
 import { costDelivery } from "@/src/lib/data";
 import { tkassa } from "@/src/lib/cassa/tkassa";
 import { generateRandomString } from "@/src/lib/utils";
+import { conf } from "@/src/config/conf";
 
 const orderSchema = z.object({
   firstName: z.string(),
@@ -82,10 +83,12 @@ export const order = async (
 
   total += deliveryData?.cost || 0;
 
+  const config = conf();
+
   const orderId = generateRandomString(16);
 
   const textTg = `
-<b>Новый заказ</b> &#128276;
+<b>Новый заказ на сайте ${config.title}</b> &#128276;
 
 Имя: ${validatedFields.data.firstName}
 Фамилия: ${validatedFields.data.lastName}
@@ -136,42 +139,37 @@ ${data.products
     }
   );
 
-  const htmlUser = await render(
-    <UserOrder
-      deliveryVariant={Number(validatedFields.data.delivery)}
-      orderId={orderId}
-      products={data.products}
-      total={total}
-    />,
-    {
-      pretty: true,
-    }
-  );
-
   const result = await tkassa.init({
     Amount: total * 100,
     OrderId: orderId.toString(),
-    // Shops: data.products.map((product) => ({
-    //   Name: product.title,
-    //   Amount: product.priceTotal,
-    //   ShopCode
-    // }))
+    NotificationURL: process.env.TK_NOTIFICATION_URL,
   });
 
-  console.log("PAYMENT RESULT:", JSON.stringify(result, null, 2));
-
   if (result.Success) {
+    const htmlUserEmail = await render(
+      <UserOrder
+        deliveryVariant={Number(validatedFields.data.delivery)}
+        orderId={orderId}
+        products={data.products}
+        total={total}
+        paymentUrl={result.PaymentURL}
+      />,
+      {
+        pretty: true,
+      }
+    );
+
     sendTgMessage(textTg);
 
     sendMail({
       to: validatedFields.data.email,
-      subject: `Ваш заказ на сайте Денежное дерево #${orderId}`,
-      text: htmlUser,
+      subject: `Ваш заказ на сайте ${config.title} #${orderId}`,
+      text: htmlUserEmail,
     });
 
     sendMail({
       to: process.env.SMTP_TO || "",
-      subject: `Новый заказ Денежное дерево #${orderId}`,
+      subject: `Новый заказ ${config.title} #${orderId}`,
       text: htmlAdmin,
     });
   }

@@ -3,6 +3,7 @@ import React from "react";
 import TailwindWrapper from "./TailwindWrapper";
 import MailHead from "./MailHead";
 import { costDelivery } from "../../data";
+import { conf } from "@/src/config/conf";
 
 interface IAdminOrderProps {
   products: { sku: string; preview: string | null; id: number; priceTotal: number; quantity: number; title: string }[];
@@ -28,6 +29,7 @@ export default function AdminOrder({ products, total, user, orderId, deliveryVar
 
   const host = process.env.HOST || "localhost";
   const port = process.env.PORT || 3000;
+  const config = conf()
 
   const delivery = costDelivery.get(deliveryVariant);
 
@@ -37,7 +39,7 @@ export default function AdminOrder({ products, total, user, orderId, deliveryVar
         <MailHead />
         <Section className="py-[16px] text-center">
           <Heading as="h1" className="mb-0 text-[30px] font-semibold leading-[36px]">
-            Новый заказ Денежное Дерево #{orderId}
+            Новый заказ ${config.title} #{orderId}
           </Heading>
           <Section>
             <Text className="my-[16px] text-2xl text-gray-600">
