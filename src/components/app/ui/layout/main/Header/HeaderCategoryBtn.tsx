@@ -6,14 +6,30 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "@/src/components/ui/navigation-menu";
-import Link from "next/link";
+// import Link from "next/link";
+import { usePathname } from "next/navigation";
+// import NextLink from "next/link";
+
 import React from "react";
 import CategoryMenu from "./CategoryMenu";
 import { TCategoryNode } from "@/src/app/(shop)/actions/getCategoryTree";
+import Link from "next/link";
+import { cn } from "@/src/lib/utils";
+
+// const Link = ({ href, ...props }) => {
+// 	const pathname = usePathname();
+// 	const isActive = href === pathname;
+
+// 	return (
+// 		<NavigationMenu.Link asChild active={isActive}>
+// 			<NextLink href={href} className="NavigationMenuLink" {...props} />
+// 		</NavigationMenu.Link>
+// 	);
+// };
 
 function HeaderCategoryBtn({ categories }: { categories: TCategoryNode[] }) {
-
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -21,13 +37,10 @@ function HeaderCategoryBtn({ categories }: { categories: TCategoryNode[] }) {
           <NavigationMenuTrigger>
             <Link href="/catalog" legacyBehavior passHref>
               <NavigationMenuLink
-                className={`flex items-center rounded p-1 transition-colors text-green-400 ${
-                  ""
-                  // pathname === "/catalog"
-                  //   ? "bg-green-500 text-white-100"
-                  //   : "text-green-400"
-                }
-    `}
+                className={cn(
+                  // navigationMenuTriggerStyle(),
+                  `flex items-center rounded p-1 transition-colors text-green-400`
+                )}
               >
                 <svg
                   className="mr-2"
