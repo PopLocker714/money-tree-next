@@ -51,5 +51,10 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  return new Response(undefined, { status: 200, statusText: "OK" });
+  // return response
+
+  return new Response("OK", {
+    status: 200,
+    headers: { "Content-Type": "text/plain" },
+  });
 }
