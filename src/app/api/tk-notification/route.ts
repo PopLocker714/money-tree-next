@@ -1,7 +1,7 @@
 import { conf } from "@/src/config/conf";
 import sendMail from "@/src/lib/mail/sendMail";
 import { render } from "@react-email/components";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import AdminOrderPayment from "@/src/lib/mail/templates/AdminOrderPayment";
 import sendTgMessage from "@/src/lib/tg/sendTgMessage";
 
@@ -50,4 +50,6 @@ export async function POST(request: NextRequest) {
       text: htmlAdminPaymentEmail,
     });
   }
+
+  return new Response('OK', { status: 200 });
 }
