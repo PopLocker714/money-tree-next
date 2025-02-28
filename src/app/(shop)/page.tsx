@@ -1,21 +1,13 @@
-// import CategoriesList from "../../components/app/ui/sections/CategoriesList/CategoriesList";
-import CategoriesList from "@/src/components/app/ui/sections/CategoriesList/CategoriesList";
+import CategoriesList, { ICategoryItem } from "@/src/components/app/ui/sections/CategoriesList/CategoriesList";
 import Hero from "../../components/app/ui/sections/Hero/Hero";
 import ProductSell from "../../components/app/ui/sections/ProductSell/ProductSell";
-import { conf } from "@/src/config/conf";
 import { getCategoryTree } from "./actions/getCategoryTree";
+import { conf } from "@/src/config/conf";
 import { getTreeCategoriesId } from "@/src/components/app/ui/layout/main/Catalog/getTreeCategoriesId";
 
-export interface ICategoryItem {
-  title?: string;
-  image?: string;
-  url: string;
-  id: number;
-}
-
 export default async function Home() {
-  // hardcode!!!
   const categories = await getCategoryTree();
+
   const data = conf().content.categories.data;
   const categoryListItems: ICategoryItem[] = categories
     .map((category) => {
@@ -37,11 +29,9 @@ export default async function Home() {
     })
     .filter((item) => item !== undefined);
 
-  // hardcode!!!
-
   return (
     <main>
-      <Hero categories={categoryListItems} />
+      <Hero categories={categories} />
       <CategoriesList categories={categoryListItems} />
       <ProductSell />
       <section className="container mt-4">

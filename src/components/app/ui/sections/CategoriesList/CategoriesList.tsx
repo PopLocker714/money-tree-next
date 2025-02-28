@@ -4,7 +4,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CategoryItem from "./CategoryItem";
 import RightArrow from "../../components/slider/RightArrow";
 import LeftArrow from "../../components/slider/LeftArrow";
-import { ICategoryItem } from "@/src/app/(shop)/page";
+
+export interface ICategoryItem {
+  title?: string;
+  image?: string;
+  url: string;
+  id: number;
+}
 
 function CategoriesList({ categories }: { categories: ICategoryItem[] }) {
   return (

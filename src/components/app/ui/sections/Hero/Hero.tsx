@@ -1,22 +1,28 @@
 import { conf } from "@/src/config/conf";
 import HeroSwiper, { TSlide } from "./HeroSwiper";
-import { ICategoryItem } from "@/src/app/(shop)/page";
+import { TCategoryNode } from "@/src/app/(shop)/actions/getCategoryTree";
+import { getTreeCategoriesId } from "../../layout/main/Catalog/getTreeCategoriesId";
 
-export default function Hero({ categories }: { categories: ICategoryItem[] }) {
-  const data = conf()
-    .content.hero.slides.map((slide, index) => {
-      const categoryData = categories.find(
-        (item) => slide.categoryId === item.id
-      );
+export default function Hero({ categories }: { categories: TCategoryNode[] }) {
+  const data: TSlide[] = conf().content.hero.slides.map((slide) => {
+    const categoryData = categories.find(
+      (category) => slide.categoryId === category.id
+    );
 
-      if (categoryData === undefined) {
-        return;
-      }
-
-      const slideRes: TSlide = { ...slide, url: categoryData.url, id: slide.categoryId };
-      return slideRes;
-    })
-    .filter((item) => item !== undefined);
+    return {
+      bgColor: slide.bgColor,
+      url: categoryData
+        ? "/catalog?" +
+          new URLSearchParams({
+            category: JSON.stringify(getTreeCategoriesId(categoryData)),
+          })
+        : "/catalog",
+      id: slide.categoryId,
+      btn: slide.btn,
+      title: slide.title,
+      subTitle: slide.subTitle,
+    };
+  });
 
   return (
     <section className="container my-9">

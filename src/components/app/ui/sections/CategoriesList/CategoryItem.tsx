@@ -1,5 +1,5 @@
-import { ICategoryItem } from "@/src/app/(shop)/page";
 import Link from "next/link";
+import { ICategoryItem } from "./CategoriesList";
 
 const CategoryItem = ({ url, title, image }: ICategoryItem) => {
   return (

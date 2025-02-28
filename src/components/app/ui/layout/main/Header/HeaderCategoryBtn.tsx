@@ -6,11 +6,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/src/components/ui/navigation-menu";
-// import Link from "next/link";
-import { usePathname } from "next/navigation";
-// import NextLink from "next/link";
 
 import React from "react";
 import CategoryMenu from "./CategoryMenu";
@@ -18,28 +14,17 @@ import { TCategoryNode } from "@/src/app/(shop)/actions/getCategoryTree";
 import Link from "next/link";
 import { cn } from "@/src/lib/utils";
 
-// const Link = ({ href, ...props }) => {
-// 	const pathname = usePathname();
-// 	const isActive = href === pathname;
-
-// 	return (
-// 		<NavigationMenu.Link asChild active={isActive}>
-// 			<NextLink href={href} className="NavigationMenuLink" {...props} />
-// 		</NavigationMenu.Link>
-// 	);
-// };
-
 function HeaderCategoryBtn({ categories }: { categories: TCategoryNode[] }) {
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-orange-500 hover:text-orange-500">
             <Link href="/catalog" legacyBehavior passHref>
               <NavigationMenuLink
                 className={cn(
                   // navigationMenuTriggerStyle(),
-                  `flex items-center rounded p-1 transition-colors text-green-400`
+                  `flex items-center rounded p-1 transition-colors text-orange-500`
                 )}
               >
                 <svg
@@ -75,8 +60,9 @@ function HeaderCategoryBtn({ categories }: { categories: TCategoryNode[] }) {
               </NavigationMenuLink>
             </Link>
           </NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuContent className="min-w-[700px] w-full">
             {/* <NavigationMenuLink>nice nice nice</NavigationMenuLink> */}
+            {/* <CategoryMenuTest categories={categories} /> */}
             <CategoryMenu categories={categories} />
           </NavigationMenuContent>
         </NavigationMenuItem>
