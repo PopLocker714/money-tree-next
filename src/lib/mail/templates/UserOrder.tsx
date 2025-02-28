@@ -58,12 +58,14 @@ export default function UserOrder({
           >
             Ваш заказ на сайте Денежное Дерево #{orderId}
           </Heading>
+
           <Heading
             as="h2"
             className="mb-0 text-[30px] font-semibold leading-[36px]"
           >
             Корзина заказа
           </Heading>
+
           <Section className="my-[16px] rounded-[8px] border border-solid border-gray-200 p-[16px] pt-0">
             <table className="mb-[16px]" width="100%">
               <tr>
@@ -96,6 +98,7 @@ export default function UserOrder({
                   <Text className="font-semibold">Цена</Text>
                 </th>
               </tr>
+
               {products.map((product) => {
                 return (
                   <tr key={product.id}>
@@ -186,15 +189,17 @@ export default function UserOrder({
                 </Text>
 
                 <Button
-                  className="box-border w-full rounded-[8px] bg-orange-400 px-[12px] py-[12px] text-center font-semibold text-white"
+                  className="box-border w-full rounded-[8px] bg-orange-400 px-[12px] py-[12px] text-center font-semibold text-white mb-4"
                   href={
-                    paymentUrl || host === "localhost"
+                    paymentUrl ||
+                    (host === "localhost"
                       ? `http://${host}:${port}`
-                      : `https://${host}`
+                      : `https://${host}`)
                   }
                 >
                   Оплатить
                 </Button>
+
                 <Button
                   className="box-border w-full rounded-[8px] bg-indigo-600 px-[12px] py-[12px] text-center font-semibold text-white"
                   href={

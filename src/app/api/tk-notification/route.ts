@@ -51,5 +51,5 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  return new Response('OK', { status: 200 });
+  return new Response(undefined, { status: 200, statusText: "OK" });
 }

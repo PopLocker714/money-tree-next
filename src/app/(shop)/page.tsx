@@ -6,34 +6,43 @@ import { conf } from "@/src/config/conf";
 import { getCategoryTree } from "./actions/getCategoryTree";
 import { getTreeCategoriesId } from "@/src/components/app/ui/layout/main/Catalog/getTreeCategoriesId";
 
+export interface ICategoryItem {
+  title?: string;
+  image?: string;
+  url: string;
+  id: number;
+}
+
 export default async function Home() {
   // hardcode!!!
   const categories = await getCategoryTree();
   const data = conf().content.categories.data;
-  const items = categories.map((category) => {
-    if (
-      category.id === 2 ||
-      category.id === 3 ||
-      category.id === 4 ||
-      category.id === 5
-    ) {
-      const itemData = data.find((itm, index) => index + 2 === category.id);
-      const url =
-        "/catalog?" +
-        new URLSearchParams({
-          category: JSON.stringify(getTreeCategoriesId(category)),
-        });
+  const categoryListItems: ICategoryItem[] = categories
+    .map((category) => {
+      if (
+        category.id === 2 ||
+        category.id === 3 ||
+        category.id === 4 ||
+        category.id === 5
+      ) {
+        const itemData = data.find((itm, index) => index + 2 === category.id);
+        const url =
+          "/catalog?" +
+          new URLSearchParams({
+            category: JSON.stringify(getTreeCategoriesId(category)),
+          });
 
-      return { ...itemData, url };
-    }
-  }).filter((item) => item !== undefined);;
+        return { ...itemData, url, id: category.id };
+      }
+    })
+    .filter((item) => item !== undefined);
 
   // hardcode!!!
 
   return (
     <main>
-      <Hero />
-      {<CategoriesList categories={items} />}
+      <Hero categories={categoryListItems} />
+      <CategoriesList categories={categoryListItems} />
       <ProductSell />
       <section className="container mt-4">
         <p className="mb-6">

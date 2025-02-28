@@ -12,19 +12,21 @@
           "title": "Cвой яблоневый сад",
           "subTitle": "Посадите",
           "btn": "Узнать подробнее",
-          "bgColor": "swiper-slide__ks__bg-1"
+          "bgColor": "swiper-slide__ks__bg-1",
+          "categoryId": 1
         },
-
         {
           "title": "Хвойных деревьев",
           "subTitle": "Широкий выбор ",
           "btn": "Узнать подробнее",
-          "bgColor": "swiper-slide__ks__bg-2"
+          "bgColor": "swiper-slide__ks__bg-2",
+          "categoryId": 2
         },
         {
           "title": "Большой ассортимент декоративных кустарников",
           "btn": "Узнать подробнее",
-          "bgColor": "swiper-slide__ks__bg-3"
+          "bgColor": "swiper-slide__ks__bg-3",
+          "categoryId": 4
         }
       ]
     },

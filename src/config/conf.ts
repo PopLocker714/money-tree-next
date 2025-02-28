@@ -26,17 +26,20 @@ export const conf = (): TConf => {
                 subTitle: "Создайте",
                 btn: "Узнать подробнее",
                 bgColor: "swiper-slide__bg-1",
+                categoryId: 1
               },
               {
                 title: "Cуккулентов и толстянок",
                 subTitle: "Широкий выбор ",
                 btn: "Узнать подробнее",
                 bgColor: "swiper-slide__bg-2",
+                categoryId: 1
               },
               {
                 title: "Грунты, горшки и кашпо",
                 btn: "Узнать подробнее",
                 bgColor: "swiper-slide__bg-3",
+                categoryId: 1
               },
             ],
           },

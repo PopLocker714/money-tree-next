@@ -5,19 +5,14 @@ import HeroSlideItem from "./HeroSlideItem";
 import RightArrow from "../../components/slider/RightArrow";
 import LeftArrow from "../../components/slider/LeftArrow";
 
-type TSlide =
-  | {
-      title: string;
-      subTitle: string;
-      btn: string;
-      bgColor: string;
-    }
-  | {
-      title: string;
-      btn: string;
-      bgColor: string;
-      subTitle?: undefined;
-    };
+export type TSlide = {
+  id: number;
+  title: string;
+  subTitle?: string;
+  btn: string;
+  bgColor: string;
+  url: string;
+};
 
 export default function HeroSwiper({ data }: { data: TSlide[] }) {
   return (

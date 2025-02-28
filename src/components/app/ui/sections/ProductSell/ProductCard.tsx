@@ -37,7 +37,7 @@ function ProductCard({ cost = 0, discount, id, image, title, className }: IProdu
         height={235}
         src={image || "https://placehold.co/266x235/000000/FFFFFF/png"}
       />
-      <div className="p-4">
+      <div className="p-4 flex flex-1 flex-col justify-between">
         <h3 className="text-base text-foreground mb-4">{title}</h3>
         {!discount ? (
           <p className="text-foreground flex text-xl w-fit rounded-xl py-3 px-6 bg-gray-100">{cost}₽</p>

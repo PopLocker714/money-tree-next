@@ -1,9 +1,10 @@
 "use client";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import CategoryItem, { ICategoryItem } from "./CategoryItem";
+import CategoryItem from "./CategoryItem";
 import RightArrow from "../../components/slider/RightArrow";
 import LeftArrow from "../../components/slider/LeftArrow";
+import { ICategoryItem } from "@/src/app/(shop)/page";
 
 function CategoriesList({ categories }: { categories: ICategoryItem[] }) {
   return (

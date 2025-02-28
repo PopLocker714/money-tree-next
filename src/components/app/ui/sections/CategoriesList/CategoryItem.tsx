@@ -1,10 +1,5 @@
+import { ICategoryItem } from "@/src/app/(shop)/page";
 import Link from "next/link";
-
-export interface ICategoryItem {
-  title?: string;
-  image?: string;
-  url: string;
-}
 
 const CategoryItem = ({ url, title, image }: ICategoryItem) => {
   return (

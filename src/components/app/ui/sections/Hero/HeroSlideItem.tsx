@@ -1,12 +1,7 @@
 import Link from "next/link";
+import { TSlide } from "./HeroSwiper";
 
-interface IHeroSlideItemProps {
-  title: string;
-  subTitle?: string;
-  btn: string;
-}
-
-function HeroSlideItem({ subTitle, title, btn }: IHeroSlideItemProps) {
+function HeroSlideItem({ subTitle, title, btn, url, bgColor }: TSlide) {
   return (
     <>
       <div className='flex flex-col ml-3 md:ml-24'>
@@ -14,7 +9,7 @@ function HeroSlideItem({ subTitle, title, btn }: IHeroSlideItemProps) {
         <h3 className="text-3xl md:text-5xl font-semibold mt-4 mb-8 max-w-[600px]">{title}</h3>
         <Link
           className="text-white-100 font-medium text-base inline-flex rounded-full w-fit p-[12px] bg-red-custom shadow-[2px_2px_4px_rgba(0,0,0,0.2)]"
-          href="/"
+          href={url}
         >
           {btn}
         </Link>

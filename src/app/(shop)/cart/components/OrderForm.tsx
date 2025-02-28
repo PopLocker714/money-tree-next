@@ -7,6 +7,7 @@ import { useCart } from "@/src/components/app/CardContext";
 import { order } from "../../actions/order";
 import { costDelivery } from "@/src/lib/data";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function OrderForm() {
   const {
@@ -52,15 +53,12 @@ export default function OrderForm() {
         </p> */}
         <h2 className="text-2xl font-medium">Запрос на оплату создан!</h2>
 
-        <button
-          disabled={pending}
+        <Link
           className="bg-orange-400 rounded-2xl py-4 px-6 text-base border-none mt-8 text-white-100 hover:bg-orange-500 disabled:bg-gray-400"
-          onClick={() => {
-            router.push(state.data.PaymentURL);
-          }}
+          href={state.data.PaymentURL}
         >
           Оплатить
-        </button>
+        </Link>
       </div>
     );
   }
